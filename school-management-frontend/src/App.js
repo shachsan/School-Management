@@ -1,6 +1,5 @@
 import React from "react";
-
-import Calendar from "./components/Calendar";
+import SchedulePageContainer from './containers/SchedulePageContainer';
 
 import "./App.css";
 
@@ -10,15 +9,16 @@ class App extends React.Component {
       <div className="App">
         <header>
           <div id="logo">
-            <span className="icon">date_range</span>
+            <span className="icon swing">date_range</span>
             <span>
               Book <b>Lecture Room</b>
             </span>
           </div>
         </header>
-        <main>
-          <Calendar />
-        </main>
+        
+          <SchedulePageContainer />
+          
+        
       </div>
     );
   }

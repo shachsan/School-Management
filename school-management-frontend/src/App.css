@@ -1,39 +1,27 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* FONT IMPORTS */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+.swing {
+  animation: swing ease-in-out 1s infinite alternate;
+  transform-origin: center -20px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+.icon {
+  /* border: 5px solid #f8f8f8; */
+  width: 35px;
+  margin-right: 10px;
+  display: block;
+}
+
+
+
+@keyframes swing {
+  0% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
 
 .icon {
   font-family: 'Material Icons', serif;
@@ -72,6 +60,9 @@
   box-sizing: border-box;
 }
 
+.App{
+  width: 100%;
+}
 body {
     font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     font-size: 1em;
@@ -93,21 +84,28 @@ header {
 header #logo {
   font-size: 175%;
   text-align: center;
-  color: var(--main-color);
+  color: darkred;
   line-height: 1;
 }
 
-header #logo .icon {
-  padding-right: .25em;
-}
+
 
 main {
   display: block;
+  width: 100%;
   margin: 0 auto;
   margin-top: 5em;
   max-width: 50em;
 }
 
+/* SCHEDULE SIDE BAR */
+.schedule{
+  vertical-align: top;
+  width: 25%;
+  margin-left: 20px;
+  display: inline-block;
+  border: 2px solid lightgray;
+}
 
 /* GRID */
 
@@ -149,9 +147,9 @@ main {
 /* Calendar */
 
 .calendar {
-  display: block;
+  display: inline-block;
   position: relative;
-  width: 100%;
+  width: 70%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
 }
@@ -208,9 +206,9 @@ main {
 }
 
 .calendar .body .selected {
-  border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #1a8fff 0%,#53cbf1 40%);
-  border-image-slice: 1;
+  border: 10px solid red;
+  /* border-image: linear-gradient(45deg, #1a8fff 0%,#53cbf1 40%); */
+  /* border-image-slice: 1; */
 }
 
 .calendar .body .row {
@@ -226,12 +224,26 @@ main {
 }
 
 .calendar .body .cell .number {
+  font-weight: 700;
   position: absolute;
-  font-size: 82.5%;
+  font-size: 1em;
   line-height: 1;
   top: .75em;
   right: .75em;
-  font-weight: 700;
+  /* transition: .25s ease-out; */
+  letter-spacing: -.07em;
+}
+
+.calendar .body .cell:hover .number, .calendar .body .selected .number {
+  font-weight: 900;
+  position: absolute;
+  font-size: 2.2em;
+  line-height: 1;
+  text-align: center;
+  /* vertical-align: middle; */
+  top: .50em;
+  right: 1em;
+  transition: .35s ease-out;
 }
 
 .calendar .body .disabled {
@@ -244,7 +256,7 @@ main {
   line-height: 1;
   color: var(--main-color);
   opacity: 0;
-  font-size: 8em;
+  /* font-size: 8em; */
   position: absolute;
   top: -.2em;
   right: -.05em;
@@ -254,7 +266,7 @@ main {
 
 .calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
   opacity: 0.05;
-  transition: .5s ease-in;
+  transition: .10s ease-in;
 }
 
 .calendar .body .col {
