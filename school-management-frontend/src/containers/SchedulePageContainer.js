@@ -6,7 +6,13 @@ export default class SchedulePageContainer extends Component {
     render() {
         return (
             <main>
-                <Calendar />
+                <Calendar 
+                    currentMonth={this.props.currentMonth}
+                    selectedDate={this.props.selectedDate}
+                    nextMonth={this.props.nextMonth}
+                    prevMonth={this.props.prevMonth}
+                    onDateClick={this.props.onDateClick}
+                />
                 <Schedule />
             </main>
         );

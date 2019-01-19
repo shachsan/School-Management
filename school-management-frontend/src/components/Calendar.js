@@ -1,14 +1,13 @@
 import React from "react";
 import dateFns from "date-fns";
 
+
+
 class Calendar extends React.Component {
-    state = {
-        currentMonth: new Date(),
-        selectedDate: new Date()
-    };
+   
 
     renderHeader() {
-        console.log(this.state.currentMonth);
+        console.log(this.props.currentMonth);
         const dateFormat = "MMMM YYYY";
         return (
           <div className="header row flex-middle">
@@ -19,7 +18,7 @@ class Calendar extends React.Component {
             </div>
             <div className="col col-center">
               <span>
-                {dateFns.format(this.state.currentMonth, dateFormat)}
+                {dateFns.format(this.props.currentMonth, dateFormat)}
               </span>
             </div>
             <div className="col col-end" onClick={this.nextMonth}>
@@ -30,21 +29,12 @@ class Calendar extends React.Component {
       }
 
     
-      nextMonth = () => {
-        this.setState({
-          currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
-        });
-      };
-      prevMonth = () => {
-        this.setState({
-          currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
-        });
-      };
+    
 
       renderDays=()=>{
         const dateFormat = "ddd";
         const days = [];
-        let startDate = dateFns.startOfWeek(this.state.currentMonth, {weekStartsOn:1});
+        let startDate = dateFns.startOfWeek(this.props.currentMonth, {weekStartsOn:1});
         for (let i = 0; i < 7; i++) {
           days.push(
             <div className="col col-center" key={i}>
@@ -56,7 +46,8 @@ class Calendar extends React.Component {
       }
 
     renderCells=()=>{
-        const { currentMonth, selectedDate } = this.state;
+        const currentMonth = this.props.currentMonth;
+        const selectedDate = this.props.selectedDate;
         const monthStart = dateFns.startOfMonth(currentMonth);
         const monthEnd = dateFns.endOfMonth(monthStart);
         const startDate = dateFns.startOfWeek(monthStart, {weekStartsOn:1});
@@ -87,7 +78,7 @@ class Calendar extends React.Component {
                         : "disabled"
                     }`}
                     key={day}
-                    onClick={() => {this.onDateClick(dateFns.parse(cloneDay));}}
+                    onClick={() => {this.props.onDateClick(dateFns.parse(cloneDay));}}
                   >
                     <span className="number">{formattedDate}</span>
                     <span className="bg">{formattedDate}</span>
@@ -106,12 +97,6 @@ class Calendar extends React.Component {
           
     }
 
-    onDateClick = day => {
-        this.setState({
-          selectedDate: day
-        });
-      };
-   
 
   render() {
     return (
