@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from '../components/Calendar';
-import Schedule from '../components/Schedule';
+import ScheduleContainer from './ScheduleContainer';
 
 export default class SchedulePageContainer extends Component {
     render() {
@@ -13,7 +13,12 @@ export default class SchedulePageContainer extends Component {
                     prevMonth={this.props.prevMonth}
                     onDateClick={this.props.onDateClick}
                 />
-                <Schedule />
+                <ScheduleContainer schedules={this.props.schedules} 
+                    selectedDate={this.props.selectedDate}
+                    onBookItHandler={this.props.onBookItHandler}
+                    onChangeBookForm={this.props.onChangeBookForm}
+                    event={this.props.event}
+                />
             </main>
         );
     }

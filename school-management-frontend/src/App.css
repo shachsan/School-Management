@@ -19,8 +19,8 @@
 
 
 @keyframes swing {
-  0% { transform: rotate(3deg); }
-  100% { transform: rotate(-3deg); }
+  0% { transform: rotate(4deg); }
+  100% { transform: rotate(-4deg); }
 }
 
 .icon {
@@ -94,11 +94,15 @@ main {
   display: block;
   width: 100%;
   margin: 0 5px;
-  margin-top: 5em;
+  margin-top: 2em;
   /* max-width: 50em; */
 }
 
 /* SCHEDULE SIDE BAR */
+
+.lecture-room{
+  border-bottom: 2px solid gray;
+}
 .schedule{
   vertical-align: top;
   width: 25%;

@@ -7,12 +7,11 @@ class Calendar extends React.Component {
    
 
     renderHeader() {
-        console.log(this.props.currentMonth);
         const dateFormat = "MMMM YYYY";
         return (
           <div className="header row flex-middle">
             <div className="col col-start">
-              <div className="icon" onClick={this.prevMonth}>
+              <div className="icon" onClick={this.props.prevMonth}>
                 chevron_left
               </div>
             </div>
@@ -21,7 +20,7 @@ class Calendar extends React.Component {
                 {dateFns.format(this.props.currentMonth, dateFormat)}
               </span>
             </div>
-            <div className="col col-end" onClick={this.nextMonth}>
+            <div className="col col-end" onClick={this.props.nextMonth}>
               <div className="icon">chevron_right</div>
             </div>
           </div>
@@ -52,24 +51,18 @@ class Calendar extends React.Component {
         const monthEnd = dateFns.endOfMonth(monthStart);
         const startDate = dateFns.startOfWeek(monthStart, {weekStartsOn:1});
         const endDate = dateFns.endOfWeek(monthEnd,{weekStartsOn:1});
-        console.log("current Month",currentMonth);
-        console.log("MonthStart",monthStart);
-        console.log("MonthEnd",monthEnd);
-        console.log('Start Date',startDate);
-        console.log('End Date',endDate);
+      
+        const dateFormat = "D";
+        const rows = [];
         
-            const dateFormat = "D";
-            const rows = [];
-        
-            let days = [];
-            let day = startDate;
-            let formattedDate = "";
+        let days = [];
+        let day = startDate;
+        let formattedDate = "";
         
             while (day <= endDate) {
               for (let i = 0; i < 7; i++) {
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
-                console.log(dateFns.isSameMonth(day, monthStart))
                 days.push(
                   <div
                     className={`col cell ${
