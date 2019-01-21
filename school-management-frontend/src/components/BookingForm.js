@@ -34,7 +34,7 @@ class BookingForm extends Component{
     }
 
     render(){
-        console.log('toTime',this.state.toTime);
+        console.log('toTime',this.state.fromTime);
         return ( 
             <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);this.props.toggleBooking();}}>
                 <label>Start time</label>
@@ -52,13 +52,21 @@ class BookingForm extends Component{
                 <select name='end_time' onChange={(e)=>this.props.onChangeBookForm(e)}>
                     <option>To</option>
                     {this.range(this.state.toTime).map(minute=><option key={minute} value={minute}>
-                        {this.populateSelectBox(minute)}
+                        {this.populateSelectBox(minute)} 
                     </option>)}
                 </select>
 
                 <label>Event Name</label>
                 <input type='text' name='event' placeholder='enter event name' value={this.props.event}
                     onChange={(e)=>this.props.onChangeBookForm(e)}></input>
+                
+                <label>Mod Group</label>
+                <select onChange={(e)=>this.props.onChangeModSelectionHandler(e)}>
+                    <option>Choose Mod</option>
+                    {this.props.allMods.map(mod=>
+                        <option key={mod.id} value={mod.id}>{mod.name}</option>)}
+                </select>
+
                 <input type='submit' value='Book It!'/>
                 <button onClick={this.props.onCancelBookHandler}>Cancel</button>
             </form>

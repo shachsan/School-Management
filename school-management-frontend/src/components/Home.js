@@ -3,15 +3,15 @@ import SchedulePageContainer from '../containers/SchedulePageContainer';
 import dateFns from "date-fns";
 
 import "../App.css";
-import Schedule from './Schedule';
 
 class Home extends React.Component {
       state = {
         currentMonth: new Date(),
         selectedDate: new Date(),
         selectedMod:'',
+        allMods:[],
         schedules:[],
-        scheduleId:'',
+        newScheduleId:'',
         bookForm:{
           start_time:'',
           end_time:'',
@@ -39,7 +39,7 @@ class Home extends React.Component {
 
     convertToTime=(min) => {
         if(!min.includes(':')){
-            let hours, minutes, ampm;
+            let hours, minutes;
             hours = Math.floor(min / 60);
             minutes = min % 60;
             if (minutes < 10){
@@ -53,6 +53,13 @@ class Home extends React.Component {
         }else{
             return min
         }
+    }
+
+    //Handle when mod selected during lecture room suggestion
+    onChangeModSelectionHandler=(e) => {
+        this.setState({
+            selectedMod:e.target.value,
+        })
     }
 
     onChangeBookForm=(e) => {
@@ -143,7 +150,7 @@ class Home extends React.Component {
         newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
         newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
         
-        const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.scheduleId}
+        const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.newScheduleId}
         console.log('schedules:',this.state.schedules[0].lecture_schedules);
         console.log('newBooking:',newBooking);
         
@@ -172,7 +179,7 @@ class Home extends React.Component {
           date:this.state.selectedDate,
           start_time:this.state.bookForm.start_time,
           end_time:this.state.bookForm.end_time,
-          mod_id:3,
+          mod_id:this.state.selectedMod,
           lecture_room_id:roomId,
         }
         //fetch post to lecture_schedules
@@ -180,7 +187,8 @@ class Home extends React.Component {
           method:'POST',
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify(reservation)
-        })
+        }).then(res=>res.json())
+            .then(justAddedSch=>this.setState({newScheduleId:justAddedSch.id}))
       
     }
 
@@ -189,9 +197,9 @@ class Home extends React.Component {
         .then(res=>res.json())
         .then(schedules=>this.setState({schedules}))
 
-      fetch('http://localhost:3000/api/v1/lecture_schedules')
+      fetch('http://localhost:3000/api/v1/mods')
         .then(res=>res.json())
-        .then(schedules=>this.setState({scheduleId:schedules.length+1}))
+        .then(mods=>this.setState({allMods:mods}))
     }
 
 
@@ -219,6 +227,9 @@ class Home extends React.Component {
               event={this.state.bookForm.event}
               onDeleteHandler={this.onDeleteHandler}
               onEditHandler={this.onEditHandler}
+              selectedMod={this.state.selectedMod}
+              onChangeModSelectionHandler={this.onChangeModSelectionHandler}
+              allMods={this.state.allMods}
           />
           
         

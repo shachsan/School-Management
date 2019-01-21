@@ -18,6 +18,9 @@ export default class ScheduleContainer extends Component {
                         onChangeBookForm={this.props.onChangeBookForm}
                         event={this.props.event} onDeleteHandler={this.props.onDeleteHandler}
                         onEditHandler={this.props.onEditHandler}
+                        selectedMod={this.props.selectedMod}
+                        onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
+                        allMods={this.props.allMods}
                     />)}
 
                     

@@ -6,6 +6,7 @@ export default class LectureRoom extends Component {
 
     state={
         toggleBooking:false,
+
     }
 
 
@@ -27,6 +28,9 @@ export default class LectureRoom extends Component {
                             onDeleteHandler={this.props.onDeleteHandler}
                             onEditHandler={this.props.onEditHandler}
                             onChangeBookForm={this.props.onChangeBookForm}
+                            selectedMod={this.props.selectedMod}
+                            onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
+                            allMods={this.props.allMods}
                         />
                         )}
                 </ul>
@@ -37,6 +41,9 @@ export default class LectureRoom extends Component {
                                onChangeBookForm={this.props.onChangeBookForm}
                                toggleBooking={this.onScheduleClickHandler}
                                event={this.props.event}
+                               selectedMod={this.props.selectedMod}
+                               onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
+                               allMods={this.props.allMods}
                                />
                 :null
                 }

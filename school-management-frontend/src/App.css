@@ -111,6 +111,38 @@ main {
   border: 2px solid lightgray;
 }
 
+.mod{
+  border:2px solid blue;
+  padding: 2px;
+  font:bold;
+  color:darkblue;
+  margin-left: 5px;
+}
+
+.mod-one{
+  background: yellow;
+}
+
+.mod-two{
+  background:lime;
+}
+
+.mod-three{
+  background: aqua;
+}
+
+.mod-four{
+  background:lightblue;
+}
+
+.mod-five{
+  background: rgb(219, 124, 224);
+}
+
+.mod-six{
+  background: orange;
+}
+
 /* GRID */
 
 .row {

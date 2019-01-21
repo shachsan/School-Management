@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BookingForm from './BookingForm';
 import dateFns from "date-fns";
 import UpdateForm from './updateForm';
 
@@ -15,6 +14,27 @@ export default class Schedule extends Component {
             toggleEdit:!this.state.toggleEdit
         })
     }
+
+    getModName=(modId) => {
+        const mod=this.props.allMods.filter(mod=>mod.id===modId)
+        return mod[0].name;
+    }
+
+    getClassName=(modId) => {
+        if(modId===1)
+            return 'mod mod-one'
+        else if(modId===2)
+            return 'mod mod-two'
+        else if(modId===3)
+            return 'mod mod-three'
+        else if(modId===4)
+            return 'mod mod-four'
+        else if(modId===5)
+            return 'mod mod-five'
+        else if(modId===6)
+            return 'mod mod-six'
+    }
+
     formatTime=(time) => {
         // const convertion=05:00;
         const convertUTC=time.slice(0,time.length-1);
@@ -27,24 +47,28 @@ export default class Schedule extends Component {
             <React.Fragment>
                  {dateFns.format(this.props.schedule.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')
                  
-                 ? <li>{this.formatTime(this.props.schedule.start_time)} - 
-                    {this.formatTime(this.props.schedule.end_time)} ---  
-                    {this.props.schedule.event}<br/>
-                    
-                    {this.state.toggleEdit
-                        ? <UpdateForm
-                            toggleEdit={this.state.toggleEdit}
-                            onEditHandler={this.props.onEditHandler}
-                            onChangeBookForm={this.props.onChangeBookForm}
-                            schedule={this.props.schedule}
-                            toggleEditHandler={this.toggleEditHandler}
+                 ? <li> {this.formatTime(this.props.schedule.start_time)} - 
+                        {this.formatTime(this.props.schedule.end_time)} ---  
+                        {this.props.schedule.event} 
+                        <span className={this.getClassName(this.props.schedule.mod_id)}>
+                        {this.getModName(this.props.schedule.mod_id)}</span><br/>
+                        
+                        {this.state.toggleEdit
+                            ? <UpdateForm
+                                toggleEdit={this.state.toggleEdit}
+                                onEditHandler={this.props.onEditHandler}
+                                onChangeBookForm={this.props.onChangeBookForm}
+                                schedule={this.props.schedule}
+                                toggleEditHandler={this.toggleEditHandler}
+                                selectedMod={this.props.selectedMod}
+                                allMods={this.props.allMods}
 
-                             />
-                        : null
-                    }
-                    <button onClick={()=>this.toggleEditHandler()}>Edit Schedule</button>
-                    
-                    <button onClick={(e)=>this.props.onDeleteHandler(this.props.schedule)}>Delete</button>
+                                />
+                            : null
+                        }
+                        <button onClick={()=>this.toggleEditHandler()}>Edit Schedule</button>
+                        
+                        <button onClick={(e)=>this.props.onDeleteHandler(this.props.schedule)}>Delete</button>
                     </li>
                 :null
                 }
