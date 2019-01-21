@@ -58,6 +58,14 @@ class UpdateForm extends Component{
                 <label>Event Name</label>
                 <input type='text' name='event' placeholder='enter event name' value={this.props.event}
                     onChange={(e)=>this.props.onChangeBookForm(e)}></input>
+
+                {/* <label>Mod Group</label>
+                <select onChange={(e)=>this.props.onChangeModSelectionHandler(e)}>
+                    <option>Choose Mod</option>
+                    {this.props.allMods.map(mod=>
+                        <option key={mod.id} value={mod.id}>{mod.name}</option>)}
+                </select> */}
+
                 <input type='submit' value='Update'/>
                 <button onClick={this.props.onCancelBookHandler}>Cancel</button>
             </form>

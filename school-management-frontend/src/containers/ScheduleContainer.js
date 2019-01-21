@@ -21,6 +21,7 @@ export default class ScheduleContainer extends Component {
                         selectedMod={this.props.selectedMod}
                         onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                         allMods={this.props.allMods}
+                        schedules={this.props.schedules}
                     />)}
 
                     

@@ -99,10 +99,12 @@ class Home extends React.Component {
                     sch.start_time=newBookForm.start_time
                     sch.end_time=newBookForm.end_time
                     sch.event=newBookForm.event
+                    // sch.event=newBookForm.
                     updateSch={
                         start_time:newBookForm.start_time,
                         end_time:newBookForm.end_time,
-                        event:newBookForm.event
+                        event:newBookForm.event,
+                        // mod_id:this.state.selectedMod
                     }
                     console.log('change event',sch.event);
                 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import dateFns from "date-fns";
 
 
 class BookingForm extends Component{
@@ -6,6 +7,43 @@ class BookingForm extends Component{
     state={
         fromTime:360,
         toTime:360
+    }
+
+    ifBooked=(min) => {
+        let timeBook=[];
+        const bookedHours=this.props.roomSchedules.filter(sch=>{
+            return dateFns.format(sch.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')
+
+        })
+        bookedHours.forEach(sch=>{
+            let bookedStartTime = ((dateFns.getHours(sch.start_time)+5)*60)+(dateFns.getMinutes(sch.start_time));
+            let bookedEndTime=((dateFns.getHours(sch.end_time)+5)*60)+(dateFns.getMinutes(sch.end_time));
+            timeBook.push([bookedStartTime, bookedEndTime])
+        })
+
+        for(let hours of timeBook){
+            if (min>=hours[0] && min <hours[1]){
+                return 'disabled';
+            }
+       }
+
+    }
+
+    //check if same mod is scheduled  for same time in different rooms
+
+    checkModSchedule=(modId) => {
+        console.log(modId);
+        const bookedHours=this.props.schedules.forEach(sch=>{
+            if(sch.id!==this.props.roomSchedules[0].lecture_room_id){
+                return sch.lecture_schedules.forEach(bookings=>{
+                    if (dateFns.format(bookings.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')){
+                        return bookings;
+                    }
+                })
+            }
+        })
+        console.log('room id',this.props.roomSchedules[0].lecture_room_id);
+        console.log('bookedHours',bookedHours);
     }
 
     populateSelectBox=(min) => {
@@ -36,14 +74,16 @@ class BookingForm extends Component{
     render(){
         console.log('toTime',this.state.fromTime);
         return ( 
-            <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);this.props.toggleBooking();}}>
+            <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);
+                            this.props.toggleBooking();}}>
                 <label>Start time</label>
                 <select name='start_time' onChange={(e)=>{
                     this.props.onChangeBookForm(e);
                     this.setState({toTime:Number(e.target.value)+15});}}>
+                    {/* onClick={this.blockBookedTime}> */}
                     
                     <option>From</option>
-                    {this.range(this.state.fromTime).map(minute=><option key={minute} value={minute}>
+                    {this.range(this.state.fromTime).map(minute=><option key={minute} value={minute} disabled={this.ifBooked(minute)}>
                         {this.populateSelectBox(minute)}
                     </option>)}
                 </select>
@@ -51,7 +91,7 @@ class BookingForm extends Component{
                 <label>End time</label>
                 <select name='end_time' onChange={(e)=>this.props.onChangeBookForm(e)}>
                     <option>To</option>
-                    {this.range(this.state.toTime).map(minute=><option key={minute} value={minute}>
+                    {this.range(this.state.toTime).map(minute=><option key={minute} value={minute} disabled={this.ifBooked(minute)}>
                         {this.populateSelectBox(minute)} 
                     </option>)}
                 </select>
@@ -64,7 +104,7 @@ class BookingForm extends Component{
                 <select onChange={(e)=>this.props.onChangeModSelectionHandler(e)}>
                     <option>Choose Mod</option>
                     {this.props.allMods.map(mod=>
-                        <option key={mod.id} value={mod.id}>{mod.name}</option>)}
+                        <option key={mod.id} value={mod.id}>{mod.name} disabled={this.checkModSchedule(mod.id)}</option>)}
                 </select>
 
                 <input type='submit' value='Book It!'/>

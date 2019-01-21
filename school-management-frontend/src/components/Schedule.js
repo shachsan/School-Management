@@ -61,6 +61,7 @@ export default class Schedule extends Component {
                                 schedule={this.props.schedule}
                                 toggleEditHandler={this.toggleEditHandler}
                                 selectedMod={this.props.selectedMod}
+                                onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                                 allMods={this.props.allMods}
 
                                 />
