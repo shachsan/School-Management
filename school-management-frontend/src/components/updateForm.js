@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class BookingForm extends Component{
+class UpdateForm extends Component{
 
     state={
         fromTime:360,
@@ -34,9 +34,8 @@ class BookingForm extends Component{
     }
 
     render(){
-        console.log('toTime',this.state.toTime);
         return ( 
-            <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);this.props.toggleBooking();}}>
+            <form onSubmit={(e)=>{this.props.onEditHandler(e, this.props.schedule);this.props.toggleEditHandler();}}>
                 <label>Start time</label>
                 <select name='start_time' onChange={(e)=>{
                     this.props.onChangeBookForm(e);
@@ -59,11 +58,11 @@ class BookingForm extends Component{
                 <label>Event Name</label>
                 <input type='text' name='event' placeholder='enter event name' value={this.props.event}
                     onChange={(e)=>this.props.onChangeBookForm(e)}></input>
-                <input type='submit' value='Book It!'/>
+                <input type='submit' value='Update'/>
                 <button onClick={this.props.onCancelBookHandler}>Cancel</button>
             </form>
         );
     }
 }
  
-export default BookingForm;
+export default UpdateForm;

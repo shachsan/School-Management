@@ -16,7 +16,8 @@ export default class ScheduleContainer extends Component {
                         selectedDate={this.props.selectedDate}
                         onBookItHandler={this.props.onBookItHandler}
                         onChangeBookForm={this.props.onChangeBookForm}
-                        event={this.props.event}
+                        event={this.props.event} onDeleteHandler={this.props.onDeleteHandler}
+                        onEditHandler={this.props.onEditHandler}
                     />)}
 
                     

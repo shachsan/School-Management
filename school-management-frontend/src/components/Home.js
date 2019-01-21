@@ -3,6 +3,7 @@ import SchedulePageContainer from '../containers/SchedulePageContainer';
 import dateFns from "date-fns";
 
 import "../App.css";
+import Schedule from './Schedule';
 
 class Home extends React.Component {
       state = {
@@ -36,13 +37,89 @@ class Home extends React.Component {
       });
     };
 
+    convertToTime=(min) => {
+        if(!min.includes(':')){
+            let hours, minutes, ampm;
+            hours = Math.floor(min / 60);
+            minutes = min % 60;
+            if (minutes < 10){
+                minutes = '0' + minutes; // adding leading zero
+            }
+           
+            if (hours < 10)
+                hours='0'+ hours
+
+            return hours+':'+minutes
+        }else{
+            return min
+        }
+    }
+
     onChangeBookForm=(e) => {
       // console.log(e.target.name);
       const newBookForm={...this.state.bookForm}
+
       newBookForm[e.target.name]=e.target.value
+      newBookForm.start_time=this.convertToTime(newBookForm.start_time)
+      newBookForm.end_time=this.convertToTime(newBookForm.end_time)
+    //   console.log(newBookForm);
       this.setState({
         bookForm:newBookForm
       })
+    }
+
+    //Edit schedule
+    onEditHandler=(e,schedule) => {
+        e.preventDefault();
+        console.log('schedule to be edited:', schedule);
+        console.log('new schedule', this.state.bookForm);
+
+        const newBookForm={...this.state.bookForm}
+        newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
+        newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
+        
+        // const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.scheduleId}
+        // console.log('schedules:',this.state.schedules[0].lecture_schedules);
+        // console.log('newBooking:',newBooking);
+        
+        let newSchedule=[...this.state.schedules]
+        newSchedule.forEach(lectureRoom=>{
+          if(lectureRoom.id===schedule.lecture_room_id){
+            lectureRoom.lecture_schedules.forEach(sch=>{
+                if(sch.id===schedule.id){
+                    sch.start_time=newBookForm.start_time
+                    sch.end_time=newBookForm.end_time
+                    sch.event=newBookForm.event
+                    console.log('change event',sch.event);
+                }
+            })
+          }
+
+        })
+    }
+
+    //Delete schedule Handler
+    onDeleteHandler=(schedule) => {
+        const id=schedule.id
+        let newSchedule=[...this.state.schedules];
+            newSchedule.forEach(room=>{
+                if(room.id===schedule.lecture_room_id){
+                    room.lecture_schedules.forEach(sch=>{
+                        if(sch.id===schedule.id){
+                            let i=room.lecture_schedules.indexOf(sch);
+                            room.lecture_schedules.splice(i,1)
+                        }
+                    })
+                }
+            })
+
+        this.setState({
+            schedules:newSchedule
+        })
+
+        fetch(`http://localhost:3000/api/v1/lecture_schedules/${id}`,{
+          method:'DELETE'
+        })
     }
     
     onSubmitFormHandler=(e, room) => {
@@ -54,6 +131,8 @@ class Home extends React.Component {
         newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
         
         const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.scheduleId}
+        console.log('schedules:',this.state.schedules[0].lecture_schedules);
+        console.log('newBooking:',newBooking);
         
         let newSchedule=[...this.state.schedules]
         newSchedule.forEach(lectureRoom=>{
@@ -125,6 +204,8 @@ class Home extends React.Component {
               onBookItHandler={this.onSubmitFormHandler}
               onChangeBookForm={this.onChangeBookForm}
               event={this.state.bookForm.event}
+              onDeleteHandler={this.onDeleteHandler}
+              onEditHandler={this.onEditHandler}
           />
           
         

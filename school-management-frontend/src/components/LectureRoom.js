@@ -24,6 +24,9 @@ export default class LectureRoom extends Component {
                     {this.props.lectureRoom.lecture_schedules.map(schedule=>
                         <Schedule key={schedule.id} schedule={schedule}
                             selectedDate={this.props.selectedDate}
+                            onDeleteHandler={this.props.onDeleteHandler}
+                            onEditHandler={this.props.onEditHandler}
+                            onChangeBookForm={this.props.onChangeBookForm}
                         />
                         )}
                 </ul>
