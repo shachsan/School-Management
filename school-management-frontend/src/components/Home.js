@@ -73,6 +73,8 @@ class Home extends React.Component {
         e.preventDefault();
         console.log('schedule to be edited:', schedule);
         console.log('new schedule', this.state.bookForm);
+        let updateSch;
+        const id=schedule.id;
 
         const newBookForm={...this.state.bookForm}
         newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
@@ -90,11 +92,22 @@ class Home extends React.Component {
                     sch.start_time=newBookForm.start_time
                     sch.end_time=newBookForm.end_time
                     sch.event=newBookForm.event
+                    updateSch={
+                        start_time:newBookForm.start_time,
+                        end_time:newBookForm.end_time,
+                        event:newBookForm.event
+                    }
                     console.log('change event',sch.event);
                 }
             })
           }
 
+        })
+
+        fetch(`http://localhost:3000/api/v1/lecture_schedules/${id}`,{
+            method: 'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(updateSch)
         })
     }
 
