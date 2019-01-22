@@ -114,7 +114,7 @@ class BookingForm extends Component{
                     {this.range(this.state.toTime).map(minute=><option key={minute} value={minute} disabled={this.ifBooked(minute)}>
                         {this.populateSelectBox(minute)} 
                     </option>)}
-                </select>
+                </select><br/>
 
                 <label>Event Name</label>
                 <input type='text' name='event' placeholder='enter event name' value={this.props.event}
@@ -125,7 +125,7 @@ class BookingForm extends Component{
                     <option>Choose Mod</option>
                     {this.props.allMods.map(mod=>
                         <option key={mod.id} value={mod.id} disabled={this.checkModSchedule(mod.id)}>{mod.name}</option>)}
-                </select>
+                </select><br/>
 
                 <input type='submit' value='Book It!' disabled={this.checkInputs()}/>
                 <button onClick={this.props.onCancelBookHandler}>Cancel</button>
