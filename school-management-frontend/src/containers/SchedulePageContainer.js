@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import Calendar from '../components/Calendar';
 import ScheduleContainer from './ScheduleContainer';
+import NavBar from '../components/NavBar';
 
 export default class SchedulePageContainer extends Component {
     render() {
         return (
             <main>
+                <NavBar selectedDate={this.props.selectedDate}
+                        schedules={this.props.schedules}
+                        onChangeSortHandler={this.props.onChangeSortHandler}
+
+                />
+                
                 <Calendar 
                     currentMonth={this.props.currentMonth}
                     selectedDate={this.props.selectedDate}

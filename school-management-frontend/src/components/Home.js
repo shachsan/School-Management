@@ -10,6 +10,7 @@ class Home extends React.Component {
         selectedDate: new Date(),
         selectedMod:'',
         allMods:[],
+        sort:'',
         schedules:[],
         newScheduleId:'',
         bookForm:{
@@ -55,9 +56,60 @@ class Home extends React.Component {
         }
     }
 
+    getModName=(modId) => {
+        const mod=this.state.allMods.filter(mod=>mod.id===modId)
+        return mod[0].name;
+    }
+
+    
+    onChangeSortHandler=async(e) => {
+        await this.setState({
+            sort:e.target.value
+        })
+
+        this.sortSchedules(this.state.sort);
+    }
+
+    //sort function
+    sortSchedules=(type) => {
+        if (type==='time'){
+            const newSchedule = [...this.state.schedules]
+            newSchedule.forEach(lectureRoom=>{
+                  lectureRoom.lecture_schedules.sort((s1, s2)=>{
+                            if (s1.start_time > s2.start_time)
+                                return 1
+                            else if (s1.start_time < s2.start_time)
+                                return -1
+                    })
+            })
+
+            this.setState({
+                schedules:newSchedule
+            })
+        }else if(type==='mod'){
+            const newSchedule = [...this.state.schedules]
+            newSchedule.forEach(lectureRoom=>{
+                  lectureRoom.lecture_schedules.sort((s1, s2)=>{
+                        s1.modName=this.getModName(s1.mod_id)
+                        s2.modName=this.getModName(s2.mod_id)
+                        console.log(s1.modName);
+                            if (s1.modName > s2.modName)
+                                return 1
+                            else if (s1.modName < s2.modName)
+                                return -1
+                    })
+            })
+
+            this.setState({
+                schedules:newSchedule
+            })
+        }
+
+    }
+
     //Handle when mod selected during lecture room suggestion
     onChangeModSelectionHandler=(e) => {
-        this.setState({
+         this.setState({
             selectedMod:e.target.value,
         })
     }
@@ -232,6 +284,7 @@ class Home extends React.Component {
               selectedMod={this.state.selectedMod}
               onChangeModSelectionHandler={this.onChangeModSelectionHandler}
               allMods={this.state.allMods}
+              onChangeSortHandler={this.onChangeSortHandler}
           />
           
         
