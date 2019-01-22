@@ -193,7 +193,7 @@ class Home extends React.Component {
     
     onSubmitFormHandler=(e, room) => {
       e.preventDefault();
-      
+        
         const newBookForm={...this.state.bookForm}
         let roomId;
         newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
@@ -272,6 +272,7 @@ class Home extends React.Component {
               onBookItHandler={this.onSubmitFormHandler}
               onChangeBookForm={this.onChangeBookForm}
               event={this.state.bookForm.event}
+              bookForm={this.state.bookForm}
               onDeleteHandler={this.onDeleteHandler}
               onEditHandler={this.onEditHandler}
               selectedMod={this.state.selectedMod}

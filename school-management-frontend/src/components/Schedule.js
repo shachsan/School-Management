@@ -30,12 +30,17 @@ export default class Schedule extends Component {
 
     formatTime=(time) => {
         // const convertion=05:00;
+        console.log('time after clicking on a Jan 24',time);
         const convertUTC=time.slice(0,time.length-1);
         const localDateTime=new Date(convertUTC+'-05:00');//concating -5:00 to convertUTC string
         const localTime=dateFns.format(localDateTime, 'hh:mm a')
         return localTime;
     }
     render() {
+        console.log('whole schedule', this.props.schedule);
+        console.log('schedule date', dateFns.format(this.props.schedule.date, 'YYYY-MM-DD'))
+        console.log('selectedDate from state',dateFns.format(this.props.selectedDate, 'YYYY-MM-DD'))
+                 
         return (
             <React.Fragment>
                  {dateFns.format(this.props.schedule.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')

@@ -9,6 +9,11 @@ class BookingForm extends Component{
         toTime:360
     }
 
+    checkInputs=() => {
+        if(this.props.bookForm.start_time==='' || this.props.bookForm.end_time==='' || this.props.bookForm.event==='' || this.props.selectedMod==='')
+        return 'disabled'
+    }
+
     ifBooked=(min) => {
         let timeBook=[];
         const bookedHours=this.props.roomSchedules.filter(sch=>{
@@ -88,6 +93,7 @@ class BookingForm extends Component{
     render(){
         console.log('toTime',this.state.fromTime);
         return ( 
+            
             <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);
                             this.props.toggleBooking();}}>
                 <label>Start time</label>
@@ -121,7 +127,7 @@ class BookingForm extends Component{
                         <option key={mod.id} value={mod.id} disabled={this.checkModSchedule(mod.id)}>{mod.name}</option>)}
                 </select>
 
-                <input type='submit' value='Book It!'/>
+                <input type='submit' value='Book It!' disabled={this.checkInputs()}/>
                 <button onClick={this.props.onCancelBookHandler}>Cancel</button>
             </form>
         );
