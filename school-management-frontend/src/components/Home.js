@@ -115,13 +115,11 @@ class Home extends React.Component {
     }
 
     onChangeBookForm=(e) => {
-      // console.log(e.target.name);
       const newBookForm={...this.state.bookForm}
 
       newBookForm[e.target.name]=e.target.value
       newBookForm.start_time=this.convertToTime(newBookForm.start_time)
       newBookForm.end_time=this.convertToTime(newBookForm.end_time)
-    //   console.log(newBookForm);
       this.setState({
         bookForm:newBookForm
       })
@@ -139,9 +137,6 @@ class Home extends React.Component {
         newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
         newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
         
-        // const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.scheduleId}
-        // console.log('schedules:',this.state.schedules[0].lecture_schedules);
-        // console.log('newBooking:',newBooking);
         
         let newSchedule=[...this.state.schedules]
         newSchedule.forEach(lectureRoom=>{
@@ -204,10 +199,8 @@ class Home extends React.Component {
         newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
         newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
         
-        const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.newScheduleId}
-        console.log('schedules:',this.state.schedules[0].lecture_schedules);
-        console.log('newBooking:',newBooking);
-        
+        const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.newScheduleId, mod_id:this.state.selectedMod}
+        console.log(newBooking);
         let newSchedule=[...this.state.schedules]
         newSchedule.forEach(lectureRoom=>{
           if(lectureRoom.name===room){
@@ -227,7 +220,7 @@ class Home extends React.Component {
           }
         })
 
-        //obtain mod_id  dynamically
+        //setting new schedule for fetch post
         const reservation={
           event:this.state.bookForm.event,
           date:this.state.selectedDate,

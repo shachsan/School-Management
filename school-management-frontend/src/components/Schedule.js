@@ -16,25 +16,16 @@ export default class Schedule extends Component {
     }
 
     getModName=(modId) => {
-        console.log(this.props.allMods);
-        let mod=this.props.allMods.filter(mod=>mod.id===modId)
-        console.log(mod);
-        return mod[0].name;
+
+        // console.log(modId)
+        // let mod=this.props.allMods.filter(mod=>mod.id==modId)
+        // console.log(mod);
+        // return mod[0].name;
+        return `Mod ${modId}`
     }
 
     getClassName=(modId) => {
-        if(modId===1)
-            return 'mod mod-one'
-        else if(modId===2)
-            return 'mod mod-two'
-        else if(modId===3)
-            return 'mod mod-three'
-        else if(modId===4)
-            return 'mod mod-four'
-        else if(modId===5)
-            return 'mod mod-five'
-        else if(modId===6)
-            return 'mod mod-six'
+        return `mod mod-${modId}`
     }
 
     formatTime=(time) => {
@@ -53,7 +44,8 @@ export default class Schedule extends Component {
                         {this.formatTime(this.props.schedule.end_time)} ---  
                         {this.props.schedule.event} 
                         <span className={this.getClassName(this.props.schedule.mod_id)}>
-                        {this.getModName(this.props.schedule.mod_id)}</span><br/>
+                        {this.getModName(this.props.schedule.mod_id)}
+                        </span><br/>
                         
                         {this.state.toggleEdit
                             ? <UpdateForm
