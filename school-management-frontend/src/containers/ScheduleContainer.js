@@ -10,7 +10,7 @@ export default class ScheduleContainer extends Component {
         // console.log(this.props.schedules);
         return (
              <div className="schedule">
-                <h4>{dateFns.format(this.props.selectedDate, 'dddd DD')}</h4>
+                <h4 className="schedule-header">{dateFns.format(this.props.selectedDate, 'dddd DD')}</h4>
                     {this.props.schedules.map(lectureRoom=>
                     <LectureRoom key={lectureRoom.id} lectureRoom={lectureRoom}
                         selectedDate={this.props.selectedDate}

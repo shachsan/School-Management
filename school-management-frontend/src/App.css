@@ -114,12 +114,60 @@ main {
 .lecture-room{
   border-bottom: 2px solid gray;
 }
+
+.lecture-room ul{
+  
+    list-style-image:url('./images/lecture-icon.png');
+}
+
+.reserve-button{
+  background-color: lightgreen;
+}
+
+button:hover{
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-edit{
+  background-color: lightblue;
+  color: black;
+}
+
+.btn-del{
+  margin-left: 5px;
+  color: white;
+  background-color: red;
+}
+
+.room-title{
+  
+  font-weight: 500;
+}
+
 .schedule{
   vertical-align: top;
   width: 25%;
+  max-height: 100%;
   margin-left: 20px;
+  padding: 5px;
   display: inline-block;
   border: 2px solid lightgray;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.schedule-header{
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+  background-color: bisque;
+}
+
+.reservation{
+  border: 2px solid bisque;
+  margin: 2px 0;
+  color: black;
+  padding: 2px;
 }
 
 .mod{
@@ -199,14 +247,32 @@ main {
   width: 70%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.January{
+  background-image: url(https://getflywheel.com/wp-content/uploads/2015/01/largegiffeature.gif)
+}
+
+.February{
+  background-image: url(http://cur.glitter-graphics.net/pub/2926/2926044swemslxwu6.gif)
+}
+.March{
+  background-image: url(https://www.google.com/logos/doodles/2017/grandfathers-day-2017-poland-5673656096129024-hp.gif)
+}
+
+.April{
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9fP_IuqaVLj658A5MRQXbkeqVszq6V9wceJyoFbRq0BmvF362GQ)
 }
 
 .calendar .header {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 115%;
+  color:black;
   padding: 1.5em 0;
   border-bottom: 1px solid var(--border-color);
+  
 }
 
 .calendar .header .icon {
@@ -231,7 +297,7 @@ main {
 .calendar .days {
   text-transform: uppercase;
   font-weight: 400;
-  color: var(--text-color-light);
+  color: gray;
   font-size: 70%;
   padding: .75em 0;
   border-bottom: 1px solid var(--border-color);

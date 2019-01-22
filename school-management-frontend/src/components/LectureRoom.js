@@ -19,7 +19,7 @@ export default class LectureRoom extends Component {
     render(){
         return (
             <div className='lecture-room'> 
-                {this.props.lectureRoom.name}
+                <span className="room-title">{this.props.lectureRoom.name}</span>
                 
                 <ul>
                     {this.props.lectureRoom.lecture_schedules.map(schedule=>
@@ -34,7 +34,7 @@ export default class LectureRoom extends Component {
                         />
                         )}
                 </ul>
-                <button onClick={()=>this.onScheduleClickHandler()}>Reserve {this.props.lectureRoom.name}</button>
+                <button className="reserve-button" onClick={()=>this.onScheduleClickHandler()}>Reserve {this.props.lectureRoom.name}</button>
                 {this.state.toggleBooking
                 ? <BookingForm onBookItHandler={this.props.onBookItHandler}
                                lectureRoomName={this.props.lectureRoom.name}

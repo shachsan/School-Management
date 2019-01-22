@@ -16,7 +16,9 @@ export default class Schedule extends Component {
     }
 
     getModName=(modId) => {
-        const mod=this.props.allMods.filter(mod=>mod.id===modId)
+        console.log(this.props.allMods);
+        let mod=this.props.allMods.filter(mod=>mod.id===modId)
+        console.log(mod);
         return mod[0].name;
     }
 
@@ -47,7 +49,7 @@ export default class Schedule extends Component {
             <React.Fragment>
                  {dateFns.format(this.props.schedule.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')
                  
-                 ? <li> {this.formatTime(this.props.schedule.start_time)} - 
+                 ? <li className="reservation"> {this.formatTime(this.props.schedule.start_time)} - 
                         {this.formatTime(this.props.schedule.end_time)} ---  
                         {this.props.schedule.event} 
                         <span className={this.getClassName(this.props.schedule.mod_id)}>
@@ -67,9 +69,9 @@ export default class Schedule extends Component {
                                 />
                             : null
                         }
-                        <button onClick={()=>this.toggleEditHandler()}>Edit Schedule</button>
+                        <button className="btn-edit" onClick={()=>this.toggleEditHandler()}>Edit Schedule</button>
                         
-                        <button onClick={(e)=>this.props.onDeleteHandler(this.props.schedule)}>Delete</button>
+                        <button className="btn-del" onClick={(e)=>this.props.onDeleteHandler(this.props.schedule)}>Delete</button>
                     </li>
                 :null
                 }
