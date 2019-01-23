@@ -14,6 +14,7 @@ export default class ScheduleContainer extends Component {
                     {this.props.schedules.map(lectureRoom=>
                     <LectureRoom key={lectureRoom.id} lectureRoom={lectureRoom}
                         selectedDate={this.props.selectedDate}
+                        renderMod={this.props.renderMod}
                         bookForm={this.props.bookForm}
                         onBookItHandler={this.props.onBookItHandler}
                         onChangeBookForm={this.props.onChangeBookForm}

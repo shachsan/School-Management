@@ -26,6 +26,7 @@ export default class LectureRoom extends Component {
                 <ul>
                     {this.props.lectureRoom.lecture_schedules.map(schedule=>
                         <Schedule key={schedule.id} schedule={schedule}
+                            renderMod={this.props.renderMod}
                             selectedDate={this.props.selectedDate}
                             onDeleteHandler={this.props.onDeleteHandler}
                             onEditHandler={this.props.onEditHandler}

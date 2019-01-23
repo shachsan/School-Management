@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Calendar from '../components/Calendar';
 import ScheduleContainer from './ScheduleContainer';
 import NavBar from '../components/NavBar';
+import ModContainer from '../containers/ModContainer';
+
 
 export default class SchedulePageContainer extends Component {
     render() {
@@ -12,7 +14,11 @@ export default class SchedulePageContainer extends Component {
                         onChangeSortHandler={this.props.onChangeSortHandler}
 
                 />
+
+                {this.props.modClick ?
                 
+                <ModContainer modClick={this.props.modClick}/>
+                :
                 <Calendar 
                     currentMonth={this.props.currentMonth}
                     selectedDate={this.props.selectedDate}
@@ -20,6 +26,8 @@ export default class SchedulePageContainer extends Component {
                     prevMonth={this.props.prevMonth}
                     onDateClick={this.props.onDateClick}
                 />
+                
+                }
                 <ScheduleContainer schedules={this.props.schedules} 
                     selectedDate={this.props.selectedDate}
                     bookForm={this.props.bookForm}
@@ -30,6 +38,7 @@ export default class SchedulePageContainer extends Component {
                     selectedMod={this.props.selectedMod}
                     onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                     allMods={this.props.allMods}
+                    renderMod={this.props.renderMod}
                 />
             </main>
         );

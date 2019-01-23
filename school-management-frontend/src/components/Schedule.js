@@ -17,10 +17,6 @@ export default class Schedule extends Component {
 
     getModName=(modId) => {
 
-        // console.log(modId)
-        // let mod=this.props.allMods.filter(mod=>mod.id==modId)
-        // console.log(mod);
-        // return mod[0].name;
         return `Mod ${modId}`
     }
 
@@ -48,7 +44,7 @@ export default class Schedule extends Component {
                  ? <li className="reservation"> {this.formatTime(this.props.schedule.start_time)} - 
                         {this.formatTime(this.props.schedule.end_time)} ---  
                         {this.props.schedule.event} 
-                        <span className={this.getClassName(this.props.schedule.mod_id)}>
+                        <span onClick={(e)=>this.props.renderMod(e)} id={this.props.schedule.mod_id} className={this.getClassName(this.props.schedule.mod_id)}>
                         {this.getModName(this.props.schedule.mod_id)}
                         </span><br/>
                         

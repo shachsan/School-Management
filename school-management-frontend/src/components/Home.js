@@ -10,6 +10,7 @@ class Home extends React.Component {
         selectedDate: new Date(),
         selectedMod:'',
         allMods:[],
+        modClick:'',
         sort:'',
         schedules:[],
         newScheduleId:'',
@@ -105,6 +106,15 @@ class Home extends React.Component {
             })
         }
 
+    }
+
+    renderMod=(e) => {
+        this.setState({
+
+            modClick:e.target.id
+        })
+        console.log(e.target.id);
+        // showMod:e.target.value
     }
 
     //Handle when mod selected during lecture room suggestion
@@ -273,6 +283,8 @@ class Home extends React.Component {
         
           <SchedulePageContainer 
               currentMonth={this.state.currentMonth}
+              renderMod={this.renderMod}
+              modClick={this.state.modClick}
               selectedDate={this.state.selectedDate}
               nextMonth={this.nextMonth}
               prevMonth={this.prevMonth}
