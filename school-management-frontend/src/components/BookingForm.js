@@ -90,13 +90,35 @@ class BookingForm extends Component{
             return hours+':'+minutes+' '+ampm;
     }
     
-    range=(mins) => {
-        const array=[];
-        // const startingMin=this.state.startTime+15
-        for(let i = mins; i <= 1320; i += 15){
-            array.push(i);
+    //DO NOT DELETE
+    // range=(mins) => {
+    //     const array=[];
+    //     for(let i = mins; i <= 1320; i += 15){
+    //         array.push(i);
+    //     }
+    //     return array;
+    // }
+
+    startTimeOptions=() => {
+        const optionTemp=[];
+        for(let i = 360; i <= 1320; i += 15){
+            optionTemp.push(<option key={i} value={i} disabled={this.ifBooked(i)}>
+            {this.populateSelectBox(i)}
+        </option>);
         }
-        return array;
+        return optionTemp;
+        
+    }
+
+    endTimeOptions=() => {
+        const optionTemp=[];
+        for(let i = this.state.toTime; i <= 1320; i += 15){
+            optionTemp.push(<option key={i} value={i} disabled={this.ifBooked(i)}>
+            {this.populateSelectBox(i)}
+        </option>);
+        }
+        return optionTemp;
+        
     }
 
     render(){
@@ -106,23 +128,18 @@ class BookingForm extends Component{
             <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);
                             this.props.toggleBooking();}}>
                 <label>Start time</label>
-                <select name='start_time' onChange={(e)=>{
+                <select name='start_time' onClick={this.startTimeOptions} onChange={(e)=>{
                     this.props.onChangeBookForm(e);
                     this.setState({fromTime:e.target.value, toTime:Number(e.target.value)+15});}}>
-                    {/* onClick={this.blockBookedTime}> */}
                     
                     <option>From</option>
-                    {this.range(this.state.fromTime).map(minute=><option key={minute} value={minute} disabled={this.ifBooked(minute)}>
-                        {this.populateSelectBox(minute)}
-                    </option>)}
+                    {this.startTimeOptions()}
                 </select>
 
                 <label>End time</label>
-                <select name='end_time' onChange={(e)=>this.props.onChangeBookForm(e)}>
+                <select name='end_time' onClick={this.endTimeOptions} onChange={(e)=>this.props.onChangeBookForm(e)}>
                     <option>To</option>
-                    {this.range(this.state.toTime).map(minute=><option key={minute} value={minute} disabled={this.ifBooked(minute)}>
-                        {this.populateSelectBox(minute)} 
-                    </option>)}
+                    {this.endTimeOptions()}
                 </select><br/>
 
                 <label>Event Name</label>
