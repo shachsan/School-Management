@@ -1,13 +1,7 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Schedule from './Schedule';
 
 export default class NavBar extends React.Component {
     render() {
@@ -23,8 +17,10 @@ export default class NavBar extends React.Component {
                             <option value='time'>Schedule Time</option>
                             <option value='mod'>Mod</option>
                         </select>
+                    </Typography>
 
-                    
+                    <Typography color='inherit' variant='inherit'>
+                        <span className="nav-mods">All Mods</span>
                     </Typography>
                 </Toolbar>
             </AppBar>
