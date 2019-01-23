@@ -6,12 +6,21 @@ class BookingForm extends Component{
 
     state={
         fromTime:360,
-        toTime:360
+        toTime:360,
+        // submitButtonEnable:false
     }
 
+
     checkInputs=() => {
-        if(this.props.bookForm.start_time==='' || this.props.bookForm.end_time==='' || this.props.bookForm.event==='' || this.props.selectedMod==='')
-        return 'disabled'
+
+        
+        console.log('start time',this.props.bookForm.start_time);
+        console.log('end time',this.props.bookForm.end_time);
+        if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='' && this.props.selectedMod!=='')
+            // this.setState({submitButtonEnable:true})
+            return null;
+        else 
+            return 'disabled';
     }
 
     ifBooked=(min) => {

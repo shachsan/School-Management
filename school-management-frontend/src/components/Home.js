@@ -115,11 +115,14 @@ class Home extends React.Component {
     }
 
     onChangeBookForm=(e) => {
+        
+        
       const newBookForm={...this.state.bookForm}
 
       newBookForm[e.target.name]=e.target.value
       newBookForm.start_time=this.convertToTime(newBookForm.start_time)
       newBookForm.end_time=this.convertToTime(newBookForm.end_time)
+      
       this.setState({
         bookForm:newBookForm
       })
@@ -251,6 +254,9 @@ class Home extends React.Component {
 
 
   render() {
+    console.log('start time home render', this.state.bookForm);
+    console.log('type of start time', typeof(this.state.bookForm.start_time));
+    console.log('start time empty?', this.state.bookForm.start_time==='');
     return (
       <div className="App">
         <header>
