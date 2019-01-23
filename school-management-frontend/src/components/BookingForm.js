@@ -154,7 +154,7 @@ class BookingForm extends Component{
                 </select><br/>
 
                 <input type='submit' value='Book It!' disabled={this.checkInputs()}/>
-                <button onClick={this.props.onCancelBookHandler}>Cancel</button>
+                {/* <button>Cancel</button> */}
             </form>
         );
     }

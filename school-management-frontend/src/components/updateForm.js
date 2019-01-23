@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import dateFns from "date-fns";
 
 
 class UpdateForm extends Component{
@@ -6,6 +7,40 @@ class UpdateForm extends Component{
     state={
         fromTime:360,
         toTime:360
+    }
+
+    checkInputs=() => {
+
+        
+        // console.log('start time',this.props.bookForm.start_time);
+        // console.log('end time',this.props.bookForm.end_time);
+        if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='')
+            // this.setState({submitButtonEnable:true})
+            return null;
+        else 
+            return 'disabled';
+    }
+
+
+    ifBooked=(min) => {
+        let timeBook=[];
+        const bookedHours=this.props.lectureRoom.lecture_schedules.filter(sch=>{
+            return dateFns.format(sch.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')
+
+        })
+        bookedHours.forEach(sch=>{
+            let bookedStartTime = ((dateFns.getHours(sch.start_time)+5)*60)+(dateFns.getMinutes(sch.start_time));
+            let bookedEndTime=((dateFns.getHours(sch.end_time)+5)*60)+(dateFns.getMinutes(sch.end_time));
+            timeBook.push([bookedStartTime, bookedEndTime])
+        })
+        
+        console.log(timeBook);
+        for(let hours of timeBook){
+            if (min>=hours[0] && min <hours[1]){
+                return 'disabled';
+            }
+       }
+
     }
 
     populateSelectBox=(min) => {
@@ -23,36 +58,47 @@ class UpdateForm extends Component{
             
             return hours+':'+minutes+' '+ampm;
     }
-    
-    range=(mins) => {
-        const array=[];
-        // const startingMin=this.state.startTime+15
-        for(let i = mins; i <= 1320; i += 15){
-            array.push(i);
+
+    startTimeOptions=() => {
+        const optionTemp=[];
+        for(let i = 360; i <= 1320; i += 15){
+            optionTemp.push(<option key={i} value={i} disabled={this.ifBooked(i)}>
+            {this.populateSelectBox(i)}
+        </option>);
         }
-        return array;
+        return optionTemp;
+        
     }
 
+    endTimeOptions=() => {
+        const optionTemp=[];
+        for(let i = this.state.toTime; i <= 1320; i += 15){
+            optionTemp.push(<option key={i} value={i} disabled={this.ifBooked(i)}>
+            {this.populateSelectBox(i)}
+        </option>);
+        }
+        return optionTemp;
+        
+    }
+
+
     render(){
+        // console.log(this.props.lectureRoom.lecture_schedules);
         return ( 
             <form onSubmit={(e)=>{this.props.onEditHandler(e, this.props.schedule);this.props.toggleEditHandler();}}>
                 <label>Start time</label>
-                <select name='start_time' onChange={(e)=>{
+                <select name='start_time' onClick={this.startTimeOptions} onChange={(e)=>{
                     this.props.onChangeBookForm(e);
-                    this.setState({toTime:Number(e.target.value)+15});}}>
+                    this.setState({fromTime:e.target.value, toTime:Number(e.target.value)+15});}}>
                     
                     <option>From</option>
-                    {this.range(this.state.fromTime).map(minute=><option key={minute} value={minute}>
-                        {this.populateSelectBox(minute)}
-                    </option>)}
+                    {this.startTimeOptions()}
                 </select>
 
                 <label>End time</label>
-                <select name='end_time' onChange={(e)=>this.props.onChangeBookForm(e)}>
+                <select name='end_time' onClick={this.endTimeOptions} onChange={(e)=>this.props.onChangeBookForm(e)}>
                     <option>To</option>
-                    {this.range(this.state.toTime).map(minute=><option key={minute} value={minute}>
-                        {this.populateSelectBox(minute)}
-                    </option>)}
+                    {this.endTimeOptions()}
                 </select>
 
                 <label>Event Name</label>
@@ -66,8 +112,8 @@ class UpdateForm extends Component{
                         <option key={mod.id} value={mod.id}>{mod.name}</option>)}
                 </select> */}
 
-                <input type='submit' value='Update'/>
-                <button onClick={this.props.onCancelBookHandler}>Cancel</button>
+                <input type='submit' value='Update' disabled={this.checkInputs()}/>
+                {/* <button>Cancel</button> */}
             </form>
         );
     }

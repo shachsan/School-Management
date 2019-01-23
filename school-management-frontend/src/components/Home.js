@@ -196,43 +196,46 @@ class Home extends React.Component {
     
     onSubmitFormHandler=(e, room) => {
       e.preventDefault();
-        
-        const newBookForm={...this.state.bookForm}
-        let roomId;
-        newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
-        newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
-        
-        const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.newScheduleId, mod_id:this.state.selectedMod}
-        console.log(newBooking);
-        let newSchedule=[...this.state.schedules]
-        newSchedule.forEach(lectureRoom=>{
-          if(lectureRoom.name===room){
-            roomId=lectureRoom.id
-            lectureRoom.lecture_schedules=[...lectureRoom.lecture_schedules, newBooking]
-          }
-
+       //fetch post to lecture_schedules
+       
+       const newBookForm={...this.state.bookForm}
+       let roomId;
+       newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
+       newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
+       
+       const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.newScheduleId, mod_id:this.state.selectedMod}
+       console.log(newBooking);
+       let newSchedule=[...this.state.schedules]
+       newSchedule.forEach(lectureRoom=>{
+           if(lectureRoom.name===room){
+               roomId=lectureRoom.id
+               lectureRoom.lecture_schedules=[...lectureRoom.lecture_schedules, newBooking]
+            }
+            
         })
         
+        console.log('before optimistic',newSchedule);
         //for optimistic update
         this.setState({
-          schedules:newSchedule,
-          bookForm:{
-            start_time:'',
-            end_time:'',
-            event:''
-          }
+            schedules:newSchedule,
+            bookForm:{
+                start_time:'',
+                end_time:'',
+                event:''
+            }
         })
-
+        
         //setting new schedule for fetch post
         const reservation={
-          event:this.state.bookForm.event,
-          date:this.state.selectedDate,
-          start_time:this.state.bookForm.start_time,
-          end_time:this.state.bookForm.end_time,
-          mod_id:this.state.selectedMod,
-          lecture_room_id:roomId,
+            event:this.state.bookForm.event,
+            date:this.state.selectedDate,
+            start_time:this.state.bookForm.start_time,
+            end_time:this.state.bookForm.end_time,
+            mod_id:this.state.selectedMod,
+            lecture_room_id:roomId,
         }
         //fetch post to lecture_schedules
+                                                
         fetch('http://localhost:3000/api/v1/lecture_schedules',{
           method:'POST',
           headers:{'Content-Type':'application/json'},

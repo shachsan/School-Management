@@ -7,6 +7,7 @@ export default class LectureRoom extends Component {
     state={
         toggleBooking:false,
         // toggleInputValidation:false,
+        
 
     }
 
@@ -30,6 +31,9 @@ export default class LectureRoom extends Component {
                             onEditHandler={this.props.onEditHandler}
                             onChangeBookForm={this.props.onChangeBookForm}
                             selectedMod={this.props.selectedMod}
+                            lectureRoom={this.props.lectureRoom}
+                            bookForm={this.props.bookForm}
+                            // roomSchedules={this.props.lectureRoom.lecture_schedules}
                             onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                             allMods={this.props.allMods}
                         />
@@ -37,8 +41,7 @@ export default class LectureRoom extends Component {
                 </ul>
                 <button className="reserve-button" onClick={()=>this.onScheduleClickHandler()}>
                     Reserve {this.props.lectureRoom.name} 
-                    {/* {this.state.toggleInputValidation ?
-                    <span>All fields required!</span> : null}> */}
+                   
                     </button>
                 {this.state.toggleBooking
                 ? <BookingForm onBookItHandler={this.props.onBookItHandler}
