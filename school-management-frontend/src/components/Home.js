@@ -3,6 +3,7 @@ import SchedulePageContainer from '../containers/SchedulePageContainer';
 import dateFns from "date-fns";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import "../App.css";
+import LectureRoom from './LectureRoom';
 
 class Home extends React.Component {
       state = {
@@ -10,7 +11,8 @@ class Home extends React.Component {
         selectedDate: new Date(),
         selectedMod:'',
         allMods:[],
-        modClick:'all',
+        header:'home',
+        // modClick:'all',
         sort:'',
         schedules:[],
         newScheduleId:'',
@@ -271,39 +273,56 @@ class Home extends React.Component {
     console.log('type of start time', typeof(this.state.bookForm.start_time));
     console.log('start time empty?', this.state.bookForm.start_time==='');
     return (
-      <div className="App">
-        <header>
-          <div id="logo">
-            <span>
-              Book <b>Lecture Room</b>
-            </span><br/>
-            <span className="icon swing">date_range</span>
-          </div>
-        </header>
-        
-          <SchedulePageContainer 
-              currentMonth={this.state.currentMonth}
-              renderMod={this.renderMod}
-              modClick={this.state.modClick}
-              selectedDate={this.state.selectedDate}
-              nextMonth={this.nextMonth}
-              prevMonth={this.prevMonth}
-              onDateClick={this.onDateClick}
-              schedules={this.state.schedules}
-              onBookItHandler={this.onSubmitFormHandler}
-              onChangeBookForm={this.onChangeBookForm}
-              event={this.state.bookForm.event}
-              bookForm={this.state.bookForm}
-              onDeleteHandler={this.onDeleteHandler}
-              onEditHandler={this.onEditHandler}
-              selectedMod={this.state.selectedMod}
-              onChangeModSelectionHandler={this.onChangeModSelectionHandler}
-              allMods={this.state.allMods}
-              onChangeSortHandler={this.onChangeSortHandler}
-          />
-          
-        
-      </div>
+        <Router>
+            <div className="App">
+                <Switch>
+                    <Route exact path='/' render={(props)=>(
+                        <header>
+                            <div id="logo">
+                                <span>
+                                Manage <b>School</b>
+                                </span><br/>
+                                <span className="icon swing">date_range</span>
+                            </div>
+                        </header>
+                    )}/>
+
+                    <Route exact path='/booking' render={(props)=>(
+                        <header>
+                            <div id="logo">
+                                <span>
+                                Book <b>Lecture Room</b>
+                                </span><br/>
+                                <span className="icon swing">date_range</span>
+                            </div>
+                        </header>
+                    )}/>
+                </Switch>
+                
+                <SchedulePageContainer 
+                    currentMonth={this.state.currentMonth}
+                    renderMod={this.renderMod}
+                    modClick={this.state.modClick}
+                    selectedDate={this.state.selectedDate}
+                    nextMonth={this.nextMonth}
+                    prevMonth={this.prevMonth}
+                    onDateClick={this.onDateClick}
+                    schedules={this.state.schedules}
+                    onBookItHandler={this.onSubmitFormHandler}
+                    onChangeBookForm={this.onChangeBookForm}
+                    event={this.state.bookForm.event}
+                    bookForm={this.state.bookForm}
+                    onDeleteHandler={this.onDeleteHandler}
+                    onEditHandler={this.onEditHandler}
+                    selectedMod={this.state.selectedMod}
+                    onChangeModSelectionHandler={this.onChangeModSelectionHandler}
+                    allMods={this.state.allMods}
+                    onChangeSortHandler={this.onChangeSortHandler}
+                />
+                
+                
+            </div>
+      </Router>
     );
   }
 }

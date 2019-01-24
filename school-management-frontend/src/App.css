@@ -89,13 +89,16 @@ header #logo {
 }
 
 .nav-mods{
-  border: 1px solid blue;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
   margin-left: 15px;
   padding: 0px 5px;
 }
 .nav-mods:hover{
-  background-color: white;
-  color: blue;
+  background-color:gold;
+  color:red;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -115,7 +118,10 @@ main {
 }
 
 .sort-menu-bar{
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  text-align: right;
+  margin-top: 5px;
+  color:black;
   
 }
 
