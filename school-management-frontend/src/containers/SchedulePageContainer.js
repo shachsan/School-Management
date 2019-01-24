@@ -20,7 +20,9 @@ export default class SchedulePageContainer extends Component {
                         {/* {this.props.modClick ? */}
                         <Switch>
                             <Route exact path='/' render={(props)=>(
-                                <ModContainer modClick={this.props.modClick} allMods={this.props.allMods}/>
+                                <ModContainer modClick={this.props.modClick} allMods={this.props.allMods}
+                                    modClickHandler={this.props.modClickHandler}
+                                    modSelected={this.props.modSelected}  lecSchedules={this.props.lecSchedules}/>
                                 
                                 )}/>
                         </Switch>
@@ -48,6 +50,7 @@ export default class SchedulePageContainer extends Component {
                                         allMods={this.props.allMods}
                                         renderMod={this.props.renderMod}
                                         onChangeSortHandler={this.props.onChangeSortHandler}
+                                        
                                     />
                                 </React.Fragment>
                             )}/>

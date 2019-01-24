@@ -161,7 +161,7 @@ button:hover{
   font-weight: 500;
 }
 
-.schedule{
+.schedule, .mod-side-container{
   vertical-align: top;
   width: 28%;
   overflow-y:auto;
@@ -212,6 +212,26 @@ form input[type='submit']:enabled:hover{
   margin: 2px 0;
   color: black;
   padding: 2px;
+}
+.mod-sch-date{
+  margin: 0;
+  height: 5px;
+}
+
+
+
+.borg{
+  margin-left: 15px;
+  padding: 0 5px;
+  border: 2px solid blue;
+  background-color: lightblue;
+}
+
+.turing{
+  margin-left: 15px;
+  padding: 0 5px;
+  border: 2px solid green;
+  background-color: yellow;
 }
 
 .mod{
@@ -286,7 +306,7 @@ form input[type='submit']:enabled:hover{
 
 /* Calendar */
 
-.calendar{
+.calendar, .show-mod{
   display: inline-block;
   position: relative;
   width: 70%;
@@ -296,15 +316,7 @@ form input[type='submit']:enabled:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.show-mod{
-  display: inline-block;
-  position: relative;
-  width: 70%;
-  /* max-height: 750px; */
-  background: var(--neutral-color);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+
 
 .January{
   background-image: url(https://getflywheel.com/wp-content/uploads/2015/01/largegiffeature.gif)

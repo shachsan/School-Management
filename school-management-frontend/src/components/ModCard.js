@@ -30,7 +30,7 @@ const ModCard=(props)=> {
         <CardMedia
           className={classes.media}
           image={props.mod.image}
-          title="Contemplative Reptile"
+          onClick={(e)=>props.modClickHandler(e, props.mod)}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" align='center'>
@@ -38,7 +38,7 @@ const ModCard=(props)=> {
           </Typography>
           <Typography component="p" align='center'>
             {props.mod.nick_name}<br/>
-            {props.mod.about}
+            {/* {props.mod.about} */}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -11,7 +11,9 @@ class Home extends React.Component {
         selectedDate: new Date(),
         selectedMod:'',
         allMods:[],
-        header:'home',
+        modSelected:'',
+        lecSchedules:[],
+        // header:'home',
         // modClick:'all',
         sort:'',
         schedules:[],
@@ -62,6 +64,12 @@ class Home extends React.Component {
     getModName=(modId) => {
         const mod=this.state.allMods.filter(mod=>mod.id===modId)
         return mod[0].name;
+    }
+
+    modClickHandler=(e, mod) => {
+        this.setState({
+            modSelected: mod,
+        })
     }
 
     
@@ -258,13 +266,17 @@ class Home extends React.Component {
     }
 
     componentDidMount(){
-      fetch('http://localhost:3000/api/v1/lecture_rooms')
-        .then(res=>res.json())
-        .then(schedules=>this.setState({schedules}))
+        fetch('http://localhost:3000/api/v1/lecture_rooms')
+            .then(res=>res.json())
+            .then(schedules=>this.setState({schedules}))
 
-      fetch('http://localhost:3000/api/v1/mods')
+        fetch('http://localhost:3000/api/v1/mods')
+            .then(res=>res.json())
+            .then(mods=>this.setState({allMods:mods}))
+
+        fetch('http://localhost:3000/api/v1/lecture_schedules')
         .then(res=>res.json())
-        .then(mods=>this.setState({allMods:mods}))
+        .then(lecSchedules=>this.setState({lecSchedules}))
     }
 
 
@@ -307,6 +319,7 @@ class Home extends React.Component {
                     nextMonth={this.nextMonth}
                     prevMonth={this.prevMonth}
                     onDateClick={this.onDateClick}
+                    modClickHandler={this.modClickHandler}
                     schedules={this.state.schedules}
                     onBookItHandler={this.onSubmitFormHandler}
                     onChangeBookForm={this.onChangeBookForm}
@@ -318,6 +331,8 @@ class Home extends React.Component {
                     onChangeModSelectionHandler={this.onChangeModSelectionHandler}
                     allMods={this.state.allMods}
                     onChangeSortHandler={this.onChangeSortHandler}
+                    modSelected={this.state.modSelected}
+                    lecSchedules={this.state.lecSchedules}
                 />
                 
                 
