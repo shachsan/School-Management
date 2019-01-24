@@ -2,17 +2,28 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class NavBar extends React.Component {
-    render() {
+
+const styles = {
+    
+    appbar: {
+        textAlign:'right',
+  },
+
+};
+
+const NavBar=(props)=>{
+    
+        const { classes } = props;
         return (
 
             <AppBar position='relative'>
                 <Toolbar variant='dense'>
-                    <Typography color='inherit' align='right'
+                    <Typography className={classes.appbar} color='inherit'
                         variant='inherit'>
                         Sort By  
-                        <select className="sort-menu-bar" onChange={(e)=>this.props.onChangeSortHandler(e)}>
+                        <select className="sort-menu-bar" onChange={(e)=>props.onChangeSortHandler(e)}>
                             <option>Sort type</option>
                             <option value='time'>Schedule Time</option>
                             <option value='mod'>Mod</option>
@@ -20,7 +31,7 @@ export default class NavBar extends React.Component {
                     </Typography>
 
                     <Typography color='inherit' variant='inherit'>
-                        <span className="nav-mods">All Mods</span>
+                        <span onClick={()=>props. className="nav-mods">All Mods</span>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -31,5 +42,6 @@ export default class NavBar extends React.Component {
             //     </ul>
             // </div>
         );
-    }
-};
+}
+
+export default  withStyles(styles)(NavBar);

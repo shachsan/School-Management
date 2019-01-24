@@ -1,7 +1,7 @@
 import React from "react";
 import SchedulePageContainer from '../containers/SchedulePageContainer';
 import dateFns from "date-fns";
-
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import "../App.css";
 
 class Home extends React.Component {
@@ -10,7 +10,7 @@ class Home extends React.Component {
         selectedDate: new Date(),
         selectedMod:'',
         allMods:[],
-        modClick:'',
+        modClick:'all',
         sort:'',
         schedules:[],
         newScheduleId:'',

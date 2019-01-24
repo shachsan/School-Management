@@ -3,21 +3,26 @@ import Calendar from '../components/Calendar';
 import ScheduleContainer from './ScheduleContainer';
 import NavBar from '../components/NavBar';
 import ModContainer from '../containers/ModContainer';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 export default class SchedulePageContainer extends Component {
     render() {
         return (
+            
             <main>
                 <NavBar selectedDate={this.props.selectedDate}
                         schedules={this.props.schedules}
+                        modClick={this.props.modClick}
                         onChangeSortHandler={this.props.onChangeSortHandler}
 
                 />
 
                 {this.props.modClick ?
                 
-                <ModContainer modClick={this.props.modClick}/>
+                <ModContainer modClick={this.props.modClick}
+                    allMods={this.props.allMods}
+                />
                 :
                 <Calendar 
                     currentMonth={this.props.currentMonth}
