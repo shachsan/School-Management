@@ -12,49 +12,50 @@ class UpdateForm extends Component{
     checkInputs=() => {
         // this.setState({submitButtonEnable:true})
         // if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='')
-        if(this.props.bookForm.start_time!=='' && this.props.bookForm.end_time!=='')// && this.props.bookForm.event!=='')
+        if(this.props.bookForm.start_time===undefined || this.props.bookForm.end_time===undefined){// && this.props.bookForm.event!=='')
+        return 'disabled'
+    }else{ 
         return null;
-        else 
-        return 'disabled';
     }
+}
 
 
-    ifBooked=(min) => {
-        let timeBook=[];
-        const bookedHours=this.props.lectureRoom.lecture_schedules.filter(sch=>{
-            return dateFns.format(sch.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')
-
-        })
-        bookedHours.forEach(sch=>{
-            let bookedStartTime = ((dateFns.getHours(sch.start_time)+5)*60)+(dateFns.getMinutes(sch.start_time));
-            let bookedEndTime=((dateFns.getHours(sch.end_time)+5)*60)+(dateFns.getMinutes(sch.end_time));
-            timeBook.push([bookedStartTime, bookedEndTime])
-        })
+ifBooked=(min) => {
+    let timeBook=[];
+    const bookedHours=this.props.lectureRoom.lecture_schedules.filter(sch=>{
+        return dateFns.format(sch.date, 'YYYY-MM-DD')===dateFns.format(this.props.selectedDate, 'YYYY-MM-DD')
         
+    })
+    bookedHours.forEach(sch=>{
+        let bookedStartTime = ((dateFns.getHours(sch.start_time)+5)*60)+(dateFns.getMinutes(sch.start_time));
+        let bookedEndTime=((dateFns.getHours(sch.end_time)+5)*60)+(dateFns.getMinutes(sch.end_time));
+        timeBook.push([bookedStartTime, bookedEndTime])
+    })
+    
         for(let hours of timeBook){
             if (min>=hours[0] && min <hours[1]){
                 return 'disabled';
             }
-       }
-
+        }
+        
     }
-
+    
     populateSelectBox=(min) => {
         let hours, minutes, ampm;
-            hours = Math.floor(min / 60);
-            minutes = min % 60;
-            if (minutes < 10){
-                minutes = '0' + minutes; // adding leading zero
-            }
-            ampm = hours % 24 < 12 ? 'AM' : 'PM';
-            hours = hours % 12;
-            if (hours === 0){
-                hours = 12;
-            }
-            
-            return hours+':'+minutes+' '+ampm;
+        hours = Math.floor(min / 60);
+        minutes = min % 60;
+        if (minutes < 10){
+            minutes = '0' + minutes; // adding leading zero
+        }
+        ampm = hours % 24 < 12 ? 'AM' : 'PM';
+        hours = hours % 12;
+        if (hours === 0){
+            hours = 12;
+        }
+        
+        return hours+':'+minutes+' '+ampm;
     }
-
+    
     startTimeOptions=() => {
         const optionTemp=[];
         for(let i = 360; i <= 1320; i += 15){
@@ -65,7 +66,7 @@ class UpdateForm extends Component{
         return optionTemp;
         
     }
-
+    
     endTimeOptions=() => {
         const optionTemp=[];
         for(let i = this.state.toTime; i <= 1320; i += 15){
@@ -76,9 +77,10 @@ class UpdateForm extends Component{
         return optionTemp;
         
     }
-
-
+    
+    
     render(){
+        console.log('start and end time', this.props.bookForm.start_time, 'end time', this.props.bookForm.end_time);
         return ( 
             <form onSubmit={(e)=>{this.props.onEditHandler(e, this.props.schedule);this.props.toggleEditHandler();}}>
                 <label>Start time</label>

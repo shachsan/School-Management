@@ -137,15 +137,23 @@ class Home extends React.Component {
       const newBookForm={...this.state.bookForm}
 
       newBookForm[e.target.name]=e.target.value
-        if(e.target.name==='start_time')
-            newBookForm.start_time=this.convertToTime(newBookForm.start_time)
-        else if(e.target.name==='end_time')
-            newBookForm.end_time=this.convertToTime(newBookForm.end_time)
+        if(e.target.name==='start_time'){
+            if(e.target.value==='From')
+                newBookForm.start_time=undefined
+            else
+                newBookForm.start_time=this.convertToTime(newBookForm.start_time)
+
+        }else if(e.target.name==='end_time'){
+            if(e.target.value==='To')
+                newBookForm.end_time=undefined
+            else
+                newBookForm.end_time=this.convertToTime(newBookForm.end_time)
+        }
     //   console.log('newBookForm', newBookForm);
       
       this.setState({
         bookForm:newBookForm
-      })
+      },()=>console.log('bookForm:', this.state.bookForm))
     }
 
     //Edit schedule
