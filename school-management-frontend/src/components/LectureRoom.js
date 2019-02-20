@@ -41,6 +41,7 @@ export default class LectureRoom extends Component {
                             // roomSchedules={this.props.lectureRoom.lecture_schedules}
                             onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                             allMods={this.props.allMods}
+                            onEditClickHandler={this.props.onEditClickHandler}
                         />
                         )}
                 </ul>

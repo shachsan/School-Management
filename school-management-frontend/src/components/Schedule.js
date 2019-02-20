@@ -9,10 +9,11 @@ export default class Schedule extends Component {
         toggleEdit:false
     }
 
-    toggleEditHandler=() => {
+    toggleEditHandler=(event) => {
         this.setState({
             toggleEdit:!this.state.toggleEdit
         })
+        // this.props.onEditClickHandler(event)
     }
 
     getModName=(modId) => {
@@ -26,7 +27,8 @@ export default class Schedule extends Component {
 
     formatTime=(time) => {
         // const convertion=05:00;
-        console.log('time after clicking on a Jan 24',time);
+        console.log('time',time);
+        console.log('time length', time.length);
         const convertUTC=time.slice(0,time.length-1);
         const localDateTime=new Date(convertUTC+'-05:00');//concating -5:00 to convertUTC string
         const localTime=dateFns.format(localDateTime, 'hh:mm a')
@@ -66,7 +68,7 @@ export default class Schedule extends Component {
                                 />
                             : null
                         }
-                        <button className="btn-edit" onClick={()=>this.toggleEditHandler()}>Edit Schedule</button>
+                        <button className="btn-edit" onClick={()=>{this.toggleEditHandler();this.props.onEditClickHandler(this.props.schedule.event)}}>Edit Schedule</button>
                         
                         <button className="btn-del" onClick={(e)=>this.props.onDeleteHandler(this.props.schedule)}>Delete</button>
                     </li>

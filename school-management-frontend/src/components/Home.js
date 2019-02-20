@@ -23,6 +23,10 @@ class Home extends React.Component {
 
     };
 
+    onEditClickHandler=(event)=>{
+        this.setState({bookForm:{event:event}})
+    }
+
     nextMonth = () => {
       this.setState({
         currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
@@ -128,12 +132,16 @@ class Home extends React.Component {
 
     onChangeBookForm=(e) => {
         
-        
+        console.log('target name', e.target.name);
+        console.log('target value', e.target.value);
       const newBookForm={...this.state.bookForm}
 
       newBookForm[e.target.name]=e.target.value
-      newBookForm.start_time=this.convertToTime(newBookForm.start_time)
-      newBookForm.end_time=this.convertToTime(newBookForm.end_time)
+        if(e.target.name==='start_time')
+            newBookForm.start_time=this.convertToTime(newBookForm.start_time)
+        else if(e.target.name==='end_time')
+            newBookForm.end_time=this.convertToTime(newBookForm.end_time)
+    //   console.log('newBookForm', newBookForm);
       
       this.setState({
         bookForm:newBookForm
@@ -305,6 +313,7 @@ class Home extends React.Component {
                     onChangeSortHandler={this.onChangeSortHandler}
                     modSelected={this.state.modSelected}
                     lecSchedules={this.state.lecSchedules}
+                    onEditClickHandler={this.onEditClickHandler}
                 />
                 
                 

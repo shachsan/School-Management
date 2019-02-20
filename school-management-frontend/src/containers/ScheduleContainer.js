@@ -28,6 +28,7 @@ export default class ScheduleContainer extends Component {
                         onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                         allMods={this.props.allMods}
                         schedules={this.props.schedules}
+                        onEditClickHandler={this.props.onEditClickHandler}
                     />)}
 
                     

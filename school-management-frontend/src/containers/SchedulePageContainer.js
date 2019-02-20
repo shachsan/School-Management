@@ -49,6 +49,7 @@ export default class SchedulePageContainer extends Component {
                                         allMods={this.props.allMods}
                                         renderMod={this.props.renderMod}
                                         onChangeSortHandler={this.props.onChangeSortHandler}
+                                        onEditClickHandler={this.props.onEditClickHandler}
                                         
                                     />
                                 </React.Fragment>

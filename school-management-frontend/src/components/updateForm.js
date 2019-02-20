@@ -10,11 +10,12 @@ class UpdateForm extends Component{
     }
 
     checkInputs=() => {
-        if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='')
-            // this.setState({submitButtonEnable:true})
-            return null;
+        // this.setState({submitButtonEnable:true})
+        // if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='')
+        if(this.props.bookForm.start_time!=='' && this.props.bookForm.end_time!=='')// && this.props.bookForm.event!=='')
+        return null;
         else 
-            return 'disabled';
+        return 'disabled';
     }
 
 
@@ -96,7 +97,7 @@ class UpdateForm extends Component{
                 </select>
 
                 <label>Event Name</label>
-                <input type='text' name='event' placeholder='enter event name' value={this.props.schedule.event}
+                <input type='text' name='event' placeholder='enter event name' value={this.props.bookForm.event}
                     onChange={(e)=>this.props.onChangeBookForm(e)}></input>
 
                 {/* <label>Mod Group</label>
