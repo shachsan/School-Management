@@ -183,13 +183,15 @@ form input, label, select{
   margin: 5px;
 }
 
+form label{
+  font-weight: bolder;
+}
+
 form label:nth-child(3){
   margin-left: 50px;
 }
 
-/* form input[type='submit'] .disabled{
-  cursor: none;
-} */
+
 
 form input[type='submit']:enabled:hover{
   cursor: pointer;

@@ -46,7 +46,7 @@ export default class LectureRoom extends Component {
                     </button>
                 {this.state.toggleBooking
                 ? <BookingForm onBookItHandler={this.props.onBookItHandler}
-                               lectureRoomName={this.props.lectureRoom.name}
+                               lectureRoom={this.props.lectureRoom}
                                roomSchedules={this.props.lectureRoom.lecture_schedules}
                                onChangeBookForm={this.props.onChangeBookForm}
                                toggleBooking={this.onScheduleClickHandler}

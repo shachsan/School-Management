@@ -116,7 +116,7 @@ class BookingForm extends Component{
         console.log('toTime',this.state.fromTime);
         return ( 
             
-            <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoomName);
+            <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoom.id);
                             this.props.toggleBooking();}}>
                 <label>Start time</label>
                 <select name='start_time' onClick={this.startTimeOptions} onChange={(e)=>{

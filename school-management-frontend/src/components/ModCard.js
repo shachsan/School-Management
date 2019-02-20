@@ -8,18 +8,22 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Schedule from './Schedule';
 
 const styles = {
     
     card: {
-        maxWidth: 200,
-        maxHeight:400,
+        width:'18%',
+        minWidth: 200,
+        minHeight:200,
         display:'inline-block',
         margin:'15px'
   },
   media: {
     height: 140,
+  },
+
+  action:{
+    marginLeft:'25%',
   },
 };
 
@@ -39,16 +43,12 @@ const ModCard=(props)=> {
           </Typography>
           <Typography component="p" align='center'>
             {props.mod.nick_name}<br/>
-            {/* {props.mod.about} */}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Students
-        </Button>
+      <CardActions className={classes.action}>
         <Button onClick={(e)=>props.modClickHandler(e, props.mod)} size="small" color="primary">
-          Schedule
+                Schedule
           
         </Button>
       </CardActions>

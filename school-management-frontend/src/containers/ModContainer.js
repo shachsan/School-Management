@@ -20,7 +20,6 @@ export default class ModContainer extends Component {
                 </div>
                 <ModSideContainer modSelected={this.props.modSelected}
                      lecSchedules={this.props.lecSchedules}/>
-                {/* // <div className="show-mod"><h1>{this.getModName(this.props.modClick)}</h1></div> */}
             </React.Fragment>
         );
     }

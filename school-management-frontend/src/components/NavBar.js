@@ -16,7 +16,6 @@ const styles = {
 
 const NavBar=(props)=>{
     
-        const { classes } = props;
         return (
 
             <AppBar position='relative'>
@@ -36,12 +35,6 @@ const NavBar=(props)=>{
 
                 </Toolbar>
             </AppBar>
-            // <div className="menu-bar">
-            //     <ul>
-            //         <li>Sort</li>
-            //         <li>Filter By</li>
-            //     </ul>
-            // </div>
         );
 }
 

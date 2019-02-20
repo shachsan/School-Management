@@ -3,7 +3,6 @@ import SchedulePageContainer from '../containers/SchedulePageContainer';
 import dateFns from "date-fns";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import "../App.css";
-import LectureRoom from './LectureRoom';
 
 class Home extends React.Component {
       state = {
@@ -13,8 +12,6 @@ class Home extends React.Component {
         allMods:[],
         modSelected:'',
         lecSchedules:[],
-        // header:'home',
-        // modClick:'all',
         sort:'',
         schedules:[],
         newScheduleId:'',
@@ -119,12 +116,7 @@ class Home extends React.Component {
     }
 
     renderMod=(e) => {
-        this.setState({
-
-            modClick:e.target.id
-        })
-        console.log(e.target.id);
-        // showMod:e.target.value
+        this.setState({modClick:e.target.id})
     }
 
     //Handle when mod selected during lecture room suggestion
@@ -151,8 +143,6 @@ class Home extends React.Component {
     //Edit schedule
     onEditHandler=(e,schedule) => {
         e.preventDefault();
-        console.log('schedule to be edited:', schedule);
-        console.log('new schedule', this.state.bookForm);
         let updateSch;
         const id=schedule.id;
 
@@ -169,14 +159,11 @@ class Home extends React.Component {
                     sch.start_time=newBookForm.start_time
                     sch.end_time=newBookForm.end_time
                     sch.event=newBookForm.event
-                    // sch.event=newBookForm.
                     updateSch={
                         start_time:newBookForm.start_time,
                         end_time:newBookForm.end_time,
                         event:newBookForm.event,
-                        // mod_id:this.state.selectedMod
                     }
-                    console.log('change event',sch.event);
                 }
             })
           }
@@ -214,37 +201,8 @@ class Home extends React.Component {
         })
     }
     
-    onSubmitFormHandler=(e, room) => {
-      e.preventDefault();
-       //fetch post to lecture_schedules
-       
-       const newBookForm={...this.state.bookForm}
-       let roomId;
-       newBookForm.start_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.start_time+'Z'
-       newBookForm.end_time=dateFns.format(this.state.selectedDate, 'YYYY-MM-DD')+'T'+newBookForm.end_time+'Z'
-       
-       const newBooking= {...newBookForm, date:this.state.selectedDate, id:this.state.newScheduleId, mod_id:this.state.selectedMod}
-       console.log(newBooking);
-       let newSchedule=[...this.state.schedules]
-       newSchedule.forEach(lectureRoom=>{
-           if(lectureRoom.name===room){
-               roomId=lectureRoom.id
-               lectureRoom.lecture_schedules=[...lectureRoom.lecture_schedules, newBooking]
-            }
-            
-        })
-        
-        console.log('before optimistic',newSchedule);
-        //for optimistic update
-        this.setState({
-            schedules:newSchedule,
-            bookForm:{
-                start_time:'',
-                end_time:'',
-                event:''
-            }
-        })
-        
+    onSubmitFormHandler=(e, roomId) => {
+      e.preventDefault();    
         //setting new schedule for fetch post
         const reservation={
             event:this.state.bookForm.event,
@@ -261,8 +219,18 @@ class Home extends React.Component {
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify(reservation)
         }).then(res=>res.json())
-            .then(justAddedSch=>this.setState({newScheduleId:justAddedSch.id}))
-      
+            .then(justAddedSch=>{
+                let newSchedule=[...this.state.schedules]
+                const lecRoom=newSchedule.find(room=>room.id===roomId)
+                lecRoom.lecture_schedules=[...lecRoom.lecture_schedules, justAddedSch]
+                this.setState({
+                    schedules:newSchedule,
+                    bookForm:{
+                        start_time:'',
+                        end_time:'',
+                        event:''},
+            })
+        })
     }
 
     componentDidMount(){
@@ -281,9 +249,6 @@ class Home extends React.Component {
 
 
   render() {
-    console.log('start time home render', this.state.bookForm);
-    console.log('type of start time', typeof(this.state.bookForm.start_time));
-    console.log('start time empty?', this.state.bookForm.start_time==='');
     return (
         <Router>
             <div className="App">

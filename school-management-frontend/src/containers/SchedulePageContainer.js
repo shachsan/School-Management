@@ -17,7 +17,6 @@ export default class SchedulePageContainer extends Component {
                                 
                                 />
 
-                        {/* {this.props.modClick ? */}
                         <Switch>
                             <Route exact path='/' render={(props)=>(
                                 <ModContainer modClick={this.props.modClick} allMods={this.props.allMods}
