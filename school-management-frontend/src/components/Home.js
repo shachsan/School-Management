@@ -170,6 +170,13 @@ class Home extends React.Component {
 
         })
 
+        this.setState({
+            bookForm:{
+                start_time:'',
+                end_time:'',
+                event:''},
+        })
+
         fetch(`http://localhost:3000/api/v1/lecture_schedules/${id}`,{
             method: 'PATCH',
             headers:{'Content-Type':'application/json'},

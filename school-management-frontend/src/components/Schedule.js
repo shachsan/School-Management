@@ -50,7 +50,7 @@ export default class Schedule extends Component {
                         
                         {this.state.toggleEdit
                             ? <UpdateForm
-                                toggleEdit={this.state.toggleEdit}
+                                // toggleEdit={this.state.toggleEdit}
                                 onEditHandler={this.props.onEditHandler}
                                 onChangeBookForm={this.props.onChangeBookForm}
                                 schedule={this.props.schedule}

@@ -187,9 +187,9 @@ form label{
   font-weight: bolder;
 }
 
-form label:nth-child(3){
+/* form label:nth-child(3){
   margin-left: 50px;
-}
+} */
 
 
 

@@ -10,10 +10,6 @@ class UpdateForm extends Component{
     }
 
     checkInputs=() => {
-
-        
-        // console.log('start time',this.props.bookForm.start_time);
-        // console.log('end time',this.props.bookForm.end_time);
         if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='')
             // this.setState({submitButtonEnable:true})
             return null;
@@ -34,7 +30,6 @@ class UpdateForm extends Component{
             timeBook.push([bookedStartTime, bookedEndTime])
         })
         
-        console.log(timeBook);
         for(let hours of timeBook){
             if (min>=hours[0] && min <hours[1]){
                 return 'disabled';
@@ -83,7 +78,6 @@ class UpdateForm extends Component{
 
 
     render(){
-        // console.log(this.props.lectureRoom.lecture_schedules);
         return ( 
             <form onSubmit={(e)=>{this.props.onEditHandler(e, this.props.schedule);this.props.toggleEditHandler();}}>
                 <label>Start time</label>
@@ -102,7 +96,7 @@ class UpdateForm extends Component{
                 </select>
 
                 <label>Event Name</label>
-                <input type='text' name='event' placeholder='enter event name' value={this.props.event}
+                <input type='text' name='event' placeholder='enter event name' value={this.props.schedule.event}
                     onChange={(e)=>this.props.onChangeBookForm(e)}></input>
 
                 {/* <label>Mod Group</label>

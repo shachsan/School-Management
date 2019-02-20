@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import Schedule from './Schedule';
 import BookingForm from '../components/BookingForm';
+import { CircularProgress } from '@material-ui/core';
 
 export default class LectureRoom extends Component {
 
     state={
         toggleBooking:false,
+        // toggleEdit:false,
         // toggleInputValidation:false,
         
 
@@ -29,6 +31,8 @@ export default class LectureRoom extends Component {
                             renderMod={this.props.renderMod}
                             selectedDate={this.props.selectedDate}
                             onDeleteHandler={this.props.onDeleteHandler}
+                            // toggleEditHandler={this.toggleEditHandler}
+                            // toggleEdit={this.state.toggleEdit}
                             onEditHandler={this.props.onEditHandler}
                             onChangeBookForm={this.props.onChangeBookForm}
                             selectedMod={this.props.selectedMod}

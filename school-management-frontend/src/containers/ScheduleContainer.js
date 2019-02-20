@@ -3,11 +3,8 @@ import LectureRoom from '../components/LectureRoom';
 import dateFns from 'date-fns';
 
 export default class ScheduleContainer extends Component {
-
     
     render() {
-        // const { schedules } = this.props
-        // console.log(this.props.schedules);
         return (
              <div className="schedule">
                 <h4 className="schedule-header">{dateFns.format(this.props.selectedDate, 'dddd DD')}</h4>
