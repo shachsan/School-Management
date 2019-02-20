@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Schedule from './Schedule';
 
 const styles = {
     
@@ -30,7 +31,7 @@ const ModCard=(props)=> {
         <CardMedia
           className={classes.media}
           image={props.mod.image}
-          onClick={(e)=>props.modClickHandler(e, props.mod)}
+          
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" align='center'>
@@ -44,10 +45,11 @@ const ModCard=(props)=> {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Instructors
-        </Button>
-        <Button size="small" color="primary">
           Students
+        </Button>
+        <Button onClick={(e)=>props.modClickHandler(e, props.mod)} size="small" color="primary">
+          Schedule
+          
         </Button>
       </CardActions>
     </Card>

@@ -89,15 +89,6 @@ class BookingForm extends Component{
             
             return hours+':'+minutes+' '+ampm;
     }
-    
-    //DO NOT DELETE
-    // range=(mins) => {
-    //     const array=[];
-    //     for(let i = mins; i <= 1320; i += 15){
-    //         array.push(i);
-    //     }
-    //     return array;
-    // }
 
     startTimeOptions=() => {
         const optionTemp=[];
@@ -140,11 +131,11 @@ class BookingForm extends Component{
                 <select name='end_time' onClick={this.endTimeOptions} onChange={(e)=>this.props.onChangeBookForm(e)}>
                     <option>To</option>
                     {this.endTimeOptions()}
-                </select><br/>
+                </select><hr/>
 
                 <label>Event Name</label>
-                <input type='text' name='event' placeholder='enter event name' value={this.props.event}
-                    onChange={(e)=>this.props.onChangeBookForm(e)}></input>
+                <input style={{display:'inline-block', width:'60%'}} type='text' name='event' placeholder='enter event name' value={this.props.event}
+                    onChange={(e)=>this.props.onChangeBookForm(e)}></input><br/>
                 
                 <label>Mod Group</label>
                 <select onChange={(e)=>{this.props.onChangeModSelectionHandler(e)}}>

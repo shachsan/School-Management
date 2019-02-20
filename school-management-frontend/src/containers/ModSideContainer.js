@@ -1,11 +1,15 @@
 import React from 'react';
 import ModSchedule from '../components/ModSchedule';
+import Student from '../components/Student';
 
 const ModSideContainer = (props) => {
     return ( 
         <div className="mod-side-container">
-            <ModSchedule modSelected={props.modSelected}
+            {/* {props.studentClicked  */}
+               {/* ? <Student/> */}
+                <ModSchedule modSelected={props.modSelected}
                 lecSchedules={props.lecSchedules}/>
+            
 
         </div>
     );

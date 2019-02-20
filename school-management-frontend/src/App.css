@@ -10,7 +10,6 @@
   box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 }
 .icon {
-  /* border: 5px solid #f8f8f8; */
   width: 35px;
   margin-right: 10px;
   display: block;
@@ -219,6 +218,9 @@ form input[type='submit']:enabled:hover{
 }
 
 
+.mod-sch-header{
+  text-align: center;
+}
 
 .borg{
   margin-left: 15px;

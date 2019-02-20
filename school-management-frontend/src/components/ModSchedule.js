@@ -19,7 +19,7 @@ const getClassName=(id) => {
 const ModSchedule = (props) => {
     return ( 
         <div>
-            <h2>{props.modSelected.name}  {props.modSelected.nick_name}</h2>
+            <h2 className='mod-sch-header'>{props.modSelected.name}  {props.modSelected.nick_name}</h2>
             <ul>
             {props.lecSchedules.filter(schedule=>schedule.mod_id===props.modSelected.id)
                 .map(sch=><li className="reservation" key={sch.id}>
