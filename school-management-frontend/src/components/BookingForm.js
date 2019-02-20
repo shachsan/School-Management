@@ -16,7 +16,8 @@ class BookingForm extends Component{
         
         console.log('start time',this.props.bookForm.start_time);
         console.log('end time',this.props.bookForm.end_time);
-        if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='' && this.props.selectedMod!=='')
+        // if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='' && this.props.selectedMod!=='')
+        if(this.props.bookForm.start_time!==undefined && this.props.bookForm.end_time!==undefined && this.props.bookForm.event!=='' && this.props.selectedMod!=='')
             // this.setState({submitButtonEnable:true})
             return null;
         else 
