@@ -26,18 +26,12 @@ export default class Schedule extends Component {
     }
 
     formatTime=(time) => {
-        // const convertion=05:00;
-        console.log('time',time);
-        console.log('time length', time.length);
         const convertUTC=time.slice(0,time.length-1);
         const localDateTime=new Date(convertUTC+'-05:00');//concating -5:00 to convertUTC string
         const localTime=dateFns.format(localDateTime, 'hh:mm a')
         return localTime;
     }
     render() {
-        console.log('whole schedule', this.props.schedule);
-        console.log('schedule date', dateFns.format(this.props.schedule.date, 'YYYY-MM-DD'))
-        console.log('selectedDate from state',dateFns.format(this.props.selectedDate, 'YYYY-MM-DD'))
                  
         return (
             <React.Fragment>
@@ -52,7 +46,6 @@ export default class Schedule extends Component {
                         
                         {this.state.toggleEdit
                             ? <UpdateForm
-                                // toggleEdit={this.state.toggleEdit}
                                 onEditHandler={this.props.onEditHandler}
                                 onChangeBookForm={this.props.onChangeBookForm}
                                 schedule={this.props.schedule}
@@ -61,7 +54,6 @@ export default class Schedule extends Component {
                                 selectedDate={this.props.selectedDate}
                                 lectureRoom={this.props.lectureRoom}
                                 bookForm={this.props.bookForm}
-                                // roomSchedules={this.props.lectureRoom.lecture_schedules}
                                 onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                                 allMods={this.props.allMods}
 

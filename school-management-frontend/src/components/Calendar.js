@@ -7,7 +7,6 @@ class Calendar extends React.Component {
    
   getClassName=(month) => {
     return dateFns.format(month, "MMMM")
-    // console.log(month);
   }
 
     renderHeader() {

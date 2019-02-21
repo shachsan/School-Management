@@ -104,7 +104,6 @@ class Home extends React.Component {
                   lectureRoom.lecture_schedules.sort((s1, s2)=>{
                         s1.modName=this.getModName(s1.mod_id)
                         s2.modName=this.getModName(s2.mod_id)
-                        console.log(s1.modName);
                             if (s1.modName > s2.modName)
                                 return 1
                             else if (s1.modName < s2.modName)
@@ -131,11 +130,7 @@ class Home extends React.Component {
     }
 
     onChangeBookForm=(e) => {
-        
-        console.log('target name', e.target.name);
-        console.log('target value', e.target.value);
       const newBookForm={...this.state.bookForm}
-
       newBookForm[e.target.name]=e.target.value
         if(e.target.name==='start_time'){
             if(e.target.value==='From')
@@ -149,11 +144,10 @@ class Home extends React.Component {
             else
                 newBookForm.end_time=this.convertToTime(newBookForm.end_time)
         }
-    //   console.log('newBookForm', newBookForm);
       
       this.setState({
         bookForm:newBookForm
-      },()=>console.log('bookForm:', this.state.bookForm))
+      })
     }
 
     //Edit schedule
@@ -193,7 +187,7 @@ class Home extends React.Component {
                 event:''},
         })
 
-        fetch(`http://localhost:3000/api/v1/lecture_schedules/${id}`,{
+        fetch(`https://book-conference-room.herokuapp.com/api/v1/lecture_schedules/${id}`,{
             method: 'PATCH',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(updateSch)
@@ -219,7 +213,7 @@ class Home extends React.Component {
             schedules:newSchedule
         })
 
-        fetch(`http://localhost:3000/api/v1/lecture_schedules/${id}`,{
+        fetch(`https://book-conference-room.herokuapp.com/api/v1/lecture_schedules/${id}`,{
           method:'DELETE'
         })
     }
@@ -237,7 +231,7 @@ class Home extends React.Component {
         }
         //fetch post to lecture_schedules
                                                 
-        fetch('http://localhost:3000/api/v1/lecture_schedules',{
+        fetch('https://book-conference-room.herokuapp.com/api/v1/lecture_schedules',{
           method:'POST',
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify(reservation)
@@ -257,15 +251,15 @@ class Home extends React.Component {
     }
 
     componentDidMount(){
-        fetch('http://localhost:3000/api/v1/lecture_rooms')
+        fetch('https://book-conference-room.herokuapp.com/api/v1/lecture_rooms')
             .then(res=>res.json())
             .then(schedules=>this.setState({schedules}))
 
-        fetch('http://localhost:3000/api/v1/mods')
+        fetch('https://book-conference-room.herokuapp.com/api/v1/mods')
             .then(res=>res.json())
             .then(mods=>this.setState({allMods:mods}))
 
-        fetch('http://localhost:3000/api/v1/lecture_schedules')
+        fetch('https://book-conference-room.herokuapp.com/api/v1/lecture_schedules')
         .then(res=>res.json())
         .then(lecSchedules=>this.setState({lecSchedules}))
     }

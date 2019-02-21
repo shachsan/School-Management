@@ -7,10 +7,6 @@ export default class LectureRoom extends Component {
 
     state={
         toggleBooking:false,
-        // toggleEdit:false,
-        // toggleInputValidation:false,
-        
-
     }
 
 
@@ -31,14 +27,11 @@ export default class LectureRoom extends Component {
                             renderMod={this.props.renderMod}
                             selectedDate={this.props.selectedDate}
                             onDeleteHandler={this.props.onDeleteHandler}
-                            // toggleEditHandler={this.toggleEditHandler}
-                            // toggleEdit={this.state.toggleEdit}
                             onEditHandler={this.props.onEditHandler}
                             onChangeBookForm={this.props.onChangeBookForm}
                             selectedMod={this.props.selectedMod}
                             lectureRoom={this.props.lectureRoom}
                             bookForm={this.props.bookForm}
-                            // roomSchedules={this.props.lectureRoom.lecture_schedules}
                             onChangeModSelectionHandler={this.props.onChangeModSelectionHandler}
                             allMods={this.props.allMods}
                             onEditClickHandler={this.props.onEditClickHandler}

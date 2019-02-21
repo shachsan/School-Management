@@ -7,18 +7,11 @@ class BookingForm extends Component{
     state={
         fromTime:360,
         toTime:360,
-        // submitButtonEnable:false
     }
 
 
     checkInputs=() => {
-
-        
-        console.log('start time',this.props.bookForm.start_time);
-        console.log('end time',this.props.bookForm.end_time);
-        // if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='' && this.props.selectedMod!=='')
         if(this.props.bookForm.start_time!==undefined && this.props.bookForm.end_time!==undefined && this.props.bookForm.event!=='' && this.props.selectedMod!=='')
-            // this.setState({submitButtonEnable:true})
             return null;
         else 
             return 'disabled';
@@ -45,9 +38,7 @@ class BookingForm extends Component{
     }
 
     //check if same mod is scheduled  for same time in different rooms
-
     checkModSchedule=(modId) => {
-        console.log(modId);
         let schedulesOnOtherRooms=[];
         this.props.schedules.forEach(room=>{
             if(room.id!==this.props.roomSchedules[0].lecture_room_id){
@@ -60,19 +51,11 @@ class BookingForm extends Component{
         })
 
         for(let sch of schedulesOnOtherRooms){
-        // schedulesOnOtherRooms.forEach(sch=>{
             let bookedStartTime = ((dateFns.getHours(sch.start_time)+5)*60)+(dateFns.getMinutes(sch.start_time));
-            console.log('bookedStartTime', bookedStartTime);
-            console.log('fromTime', this.state.fromTime);
-            console.log('type of fromTime', typeof(this.state.fromTime));
-            console.log('type of bookedStartTime', typeof(bookedStartTime));
-
             if(bookedStartTime==this.state.fromTime){
                 return 'disabled';
             }
         }
-        console.log('room id',this.props.roomSchedules[0].lecture_room_id);
-        console.log('bookedHours',schedulesOnOtherRooms);
     }
 
     populateSelectBox=(min) => {
@@ -114,7 +97,6 @@ class BookingForm extends Component{
     }
 
     render(){
-        console.log('toTime',this.state.fromTime);
         return ( 
             
             <form onSubmit={(e)=>{this.props.onBookItHandler(e, this.props.lectureRoom.id);
@@ -146,7 +128,6 @@ class BookingForm extends Component{
                 </select><br/>
 
                 <input type='submit' value='Book It!' disabled={this.checkInputs()}/>
-                {/* <button>Cancel</button> */}
             </form>
         );
     }

@@ -10,8 +10,6 @@ class UpdateForm extends Component{
     }
 
     checkInputs=() => {
-        // this.setState({submitButtonEnable:true})
-        // if(this.props.bookForm.start_time!=='00:00' && this.props.bookForm.end_time!=='00:00' && this.props.bookForm.event!=='')
         if(this.props.bookForm.start_time===undefined || this.props.bookForm.end_time===undefined){// && this.props.bookForm.event!=='')
         return 'disabled'
     }else{ 
@@ -80,7 +78,6 @@ ifBooked=(min) => {
     
     
     render(){
-        console.log('start and end time', this.props.bookForm.start_time, 'end time', this.props.bookForm.end_time);
         return ( 
             <form onSubmit={(e)=>{this.props.onEditHandler(e, this.props.schedule);this.props.toggleEditHandler();}}>
                 <label>Start time</label>
@@ -101,16 +98,7 @@ ifBooked=(min) => {
                 <label>Event Name</label>
                 <input type='text' name='event' placeholder='enter event name' value={this.props.bookForm.event}
                     onChange={(e)=>this.props.onChangeBookForm(e)}></input>
-
-                {/* <label>Mod Group</label>
-                <select onChange={(e)=>this.props.onChangeModSelectionHandler(e)}>
-                    <option>Choose Mod</option>
-                    {this.props.allMods.map(mod=>
-                        <option key={mod.id} value={mod.id}>{mod.name}</option>)}
-                </select> */}
-
                 <input type='submit' value='Update' disabled={this.checkInputs()}/>
-                {/* <button>Cancel</button> */}
             </form>
         );
     }
